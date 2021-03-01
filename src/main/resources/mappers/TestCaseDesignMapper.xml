@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lam.tms.mapper.TestCaseDesignMapper">
+    <resultMap id="BaseResultMap" type="com.lam.tms.entity.TestCaseDesign">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="case_mark" jdbcType="VARCHAR" property="caseMark"/>
+        <result column="test_track" jdbcType="VARCHAR" property="testTrack"/>
+        <result column="test_method" jdbcType="VARCHAR" property="testMethod"/>
+        <result column="test_description" jdbcType="VARCHAR" property="testDescription"/>
+        <result column="premise_constraint" jdbcType="VARCHAR" property="premiseConstraint"/>
+        <result column="end_condition" jdbcType="VARCHAR" property="endCondition"/>
+        <result column="operating_description" jdbcType="CLOB" property="operatingDescription"/>
+        <result column="expected_result" jdbcType="CLOB" property="expectedResult"/>
+        <result column="evaluation_criteria" jdbcType="VARCHAR" property="evaluationCriteria"/>
+    </resultMap>
+    <sql id="BaseList">
+        id, case_mark, test_track, test_method, test_description,
+        premise_constraint, end_condition, operating_description,
+        expected_result, evaluation_criteria
+    </sql>
+    <select id="getTestCaseDesignList" resultMap="BaseResultMap">
+        SELECT <include refid="BaseList"/> FROM test_case_design
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lam.tms.mapper.ProblemDescriptionMapper">
+    <resultMap id="BaseResultMap" type="com.lam.tms.entity.ProblemDescription">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="item_mark" jdbcType="VARCHAR" property="itemMark"/>
+        <result column="problem_mark" jdbcType="VARCHAR" property="problemMark"/>
+        <result column="case_number" jdbcType="VARCHAR" property="caseNumber"/>
+        <result column="problem_type" jdbcType="VARCHAR" property="problemType"/>
+        <result column="problem_level" jdbcType="VARCHAR" property="problemLevel"/>
+        <result column="problem_description" jdbcType="CLOB" property="problemDescription"/>
+        <result column="comment" jdbcType="CLOB" property="comment"/>
+    </resultMap>
+    <sql id="BaseList">
+        id, problem_mark, problem_type, problem_level, problem_description,
+        case_number
+    </sql>
+    <select id="getProblemList" resultMap="BaseResultMap">
+        SELECT <include refid="BaseList"/> FROM problem_description
+    </select>
+</mapper>
