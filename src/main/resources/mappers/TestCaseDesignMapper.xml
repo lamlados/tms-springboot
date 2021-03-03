@@ -22,4 +22,8 @@
     <select id="getTestCaseDesignList" resultMap="BaseResultMap">
         SELECT <include refid="BaseList"/> FROM test_case_design
     </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from test_case_design where id = #{id}
+    </delete>
 </mapper>

@@ -35,4 +35,6 @@ public class ProblemDescription extends BaseEntity implements Serializable {
     private String updateBy;
     /**备注*/
     private String comment;
+
+    private TestCaseTest testCaseTest;
 }

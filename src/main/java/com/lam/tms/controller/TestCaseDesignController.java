@@ -38,5 +38,13 @@ public class TestCaseDesignController {
         PageInfo<TestCaseDesign> pageInfo = new PageInfo<TestCaseDesign>(list);
         return JsonResult.success(pageInfo);
     }
+
+    @ApiOperation(value = "根据ID删除", notes = "根据ID删除")
+    @PostMapping("/item/delete")
+    @ResponseBody
+    public JsonResult<Integer> deleteById(Long id){
+        testCaseDesignService.deleteById(id);
+        return JsonResult.success();
+    }
 }
 

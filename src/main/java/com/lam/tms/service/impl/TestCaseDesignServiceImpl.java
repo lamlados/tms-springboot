@@ -21,4 +21,9 @@ public class TestCaseDesignServiceImpl implements TestCaseDesignService {
     public List<TestCaseDesign> getTestCaseDesignList() {
         return testCaseDesignMapper.getTestCaseDesignList();
     }
+
+    @Override
+    public int deleteById(Long id) {
+        return testCaseDesignMapper.deleteById(id);
+    }
 }

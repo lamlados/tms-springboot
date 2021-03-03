@@ -33,7 +33,6 @@ public class TestItemMainController {
     @GetMapping("/testItem")
     @ResponseBody
     public JsonResult<List<String>> getItemList(){
-        log.info("hello");
         List<String> list = testItemMainService.getNameList();
         return JsonResult.success(list);
     }

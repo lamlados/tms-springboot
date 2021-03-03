@@ -4,19 +4,26 @@
 <mapper namespace="com.lam.tms.mapper.ProblemDescriptionMapper">
     <resultMap id="BaseResultMap" type="com.lam.tms.entity.ProblemDescription">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="item_mark" jdbcType="VARCHAR" property="itemMark"/>
         <result column="problem_mark" jdbcType="VARCHAR" property="problemMark"/>
-        <result column="case_number" jdbcType="VARCHAR" property="caseNumber"/>
         <result column="problem_type" jdbcType="VARCHAR" property="problemType"/>
         <result column="problem_level" jdbcType="VARCHAR" property="problemLevel"/>
         <result column="problem_description" jdbcType="CLOB" property="problemDescription"/>
+        <result column="case_number" jdbcType="VARCHAR" property="caseNumber"/>
         <result column="comment" jdbcType="CLOB" property="comment"/>
+        <association property="testCaseTest" javaType="com.lam.tms.entity.TestCaseTest">
+            <id column="id" property="id"/>
+            <result column="test_version" property="testVersion"/>
+            <result column="test_by" property="testBy"/>
+            <result column="supervised_by" property="supervisedBy"/>
+            <result column="execution_date" property="executionDate"/>
+        </association>
     </resultMap>
-    <sql id="BaseList">
-        id, problem_mark, problem_type, problem_level, problem_description,
-        case_number
+    <sql id="MergeList">
+        problem_description.id, problem_description.problem_mark, problem_type, problem_level, problem_description, case_number, problem_description.comment,
+    test_version, test_by, supervised_by, execution_date
     </sql>
     <select id="getProblemList" resultMap="BaseResultMap">
-        SELECT <include refid="BaseList"/> FROM problem_description
+        SELECT <include refid="MergeList"/> FROM problem_description
+            left join test_case_test tct on problem_description.case_number = tct.id order by id
     </select>
 </mapper>

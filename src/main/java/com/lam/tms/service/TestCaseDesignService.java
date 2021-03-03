@@ -14,4 +14,5 @@ import java.util.List;
 
 public interface TestCaseDesignService {
     List<TestCaseDesign> getTestCaseDesignList();
+    int deleteById(Long id);
 }

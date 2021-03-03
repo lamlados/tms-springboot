@@ -20,7 +20,7 @@ public interface TestCaseDesignMapper {
 
     int createCase(TestCaseDesign newCase);
 
-    TestCaseDesign getById(Long id);
+    TestCaseDesign getByCaseMark(Long id);
 
     int updateById(Long id);
 
