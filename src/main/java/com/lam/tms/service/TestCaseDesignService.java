@@ -13,6 +13,9 @@ import java.util.List;
 
 
 public interface TestCaseDesignService {
-    List<TestCaseDesign> getTestCaseDesignList();
-    int deleteById(Long id);
+    List<TestCaseDesign> getAllList();
+    List<TestCaseDesign> getListByMark(String caseMark);
+    int deleteById(Integer id);
+    int updateById(Integer id);
+    int createCase(TestCaseDesign newCase);
 }

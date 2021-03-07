@@ -18,7 +18,10 @@ public class ProblemDescriptionServiceImpl implements ProblemDescriptionService 
     private ProblemDescriptionMapper problemDescriptionMapper;
 
     @Override
-    public List<ProblemDescription> getProblemList() {
-        return problemDescriptionMapper.getProblemList();
+    public List<ProblemDescription> getAllList() {
+        return problemDescriptionMapper.getAllList();
     }
+
+    @Override
+    public List<ProblemDescription> getListByMark(String caseMark) { return problemDescriptionMapper.getListByMark(caseMark); }
 }

@@ -36,4 +36,7 @@ public class LoginUser implements java.io.Serializable {
     @NotNull(message = "验证码 KEY 不能为空")
     private String codeKey;
 
+    @NotNull(message = "测试项目不能为空")
+    private String testItem;
+
 }

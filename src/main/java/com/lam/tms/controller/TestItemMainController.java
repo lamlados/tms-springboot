@@ -31,7 +31,6 @@ public class TestItemMainController {
 
     @ApiOperation(value = "下拉内容", notes = "下拉内容")
     @GetMapping("/testItem")
-    @ResponseBody
     public JsonResult<List<String>> getItemList(){
         List<String> list = testItemMainService.getNameList();
         return JsonResult.success(list);

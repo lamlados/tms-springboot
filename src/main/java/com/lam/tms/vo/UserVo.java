@@ -26,5 +26,7 @@ public class UserVo implements java.io.Serializable {
      */
     private String username;
 
+    private String testItem;
+
 
 }

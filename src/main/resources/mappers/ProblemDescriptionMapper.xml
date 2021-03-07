@@ -22,8 +22,15 @@
         problem_description.id, problem_description.problem_mark, problem_type, problem_level, problem_description, case_number, problem_description.comment,
     test_version, test_by, supervised_by, execution_date
     </sql>
-    <select id="getProblemList" resultMap="BaseResultMap">
+    <select id="getAllList" resultMap="BaseResultMap">
         SELECT <include refid="MergeList"/> FROM problem_description
             left join test_case_test tct on problem_description.case_number = tct.id order by id
+    </select>
+
+    <select id="getListByMark" resultMap="BaseResultMap">
+        SELECT <include refid="MergeList"/> FROM problem_description
+            left join test_case_test tct on problem_description.case_number = tct.id
+            where problem_description.problem_mark like concat('%',#{problemMark},'%')
+            order by id
     </select>
 </mapper>

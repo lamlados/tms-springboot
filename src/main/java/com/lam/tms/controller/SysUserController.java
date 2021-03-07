@@ -12,6 +12,9 @@ import com.lam.tms.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,6 +32,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/user")
 public class SysUserController extends BaseController<SysUser, Integer, SysUserService> {
 
+    @Autowired
+    @Lazy
+    private RedisTemplate<String, String> redisTemplate;
+
     @ApiOperation(value = "分页,获取用户详情", notes = "分页 查询所有，获取用户详情")
     @GetMapping("/info/page")
     public JsonResult<Page<SysUserVo>> findAllInfoPage(QueryParameter parameter) {
@@ -40,6 +47,8 @@ public class SysUserController extends BaseController<SysUser, Integer, SysUserS
     @GetMapping("/info")
     public JsonResult<UserVo> findUserInfo() {
         UserVo userInfo = baseService.findUserInfo();
+        String testItem = redisTemplate.opsForValue().get(userInfo.getUsername());
+        userInfo.setTestItem(testItem);
         return JsonResult.success(userInfo);
     }
 

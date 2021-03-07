@@ -57,6 +57,8 @@ public class AuthController {
             String message = br.getFieldError().getDefaultMessage();
             return JsonResult.fail(message);
         }
+        String testItem = user.getTestItem();
+        redisTemplate.opsForValue().set(user.getUsername(), testItem, 10, TimeUnit.MINUTES);
         // 根据 CodeKey 从 redis 中获取到 codeText
         String codeText = redisTemplate.opsForValue().get(user.getCodeKey());
         // 比较 redis 中的 codeText 和 用户输入的 codeText

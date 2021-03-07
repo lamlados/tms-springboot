@@ -16,13 +16,15 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TestCaseDesignMapper {
-    int deleteById(Long id);
+
+    int deleteById(Integer id);
+
+    int updateById(Integer id);
+
+    List<TestCaseDesign> getAllList();
 
     int createCase(TestCaseDesign newCase);
 
-    TestCaseDesign getByCaseMark(Long id);
+    List<TestCaseDesign> getListByMark(String caseMark);
 
-    int updateById(Long id);
-
-    List<TestCaseDesign> getTestCaseDesignList();
 }

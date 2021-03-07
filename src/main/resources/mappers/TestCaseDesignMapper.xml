@@ -5,6 +5,8 @@
     <resultMap id="BaseResultMap" type="com.lam.tms.entity.TestCaseDesign">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="case_mark" jdbcType="VARCHAR" property="caseMark"/>
+        <result column="item_mark" jdbcType="VARCHAR" property="itemMark"/>
+        <result column="classification_mark" jdbcType="VARCHAR" property="classificationMark"/>
         <result column="test_track" jdbcType="VARCHAR" property="testTrack"/>
         <result column="test_method" jdbcType="VARCHAR" property="testMethod"/>
         <result column="test_description" jdbcType="VARCHAR" property="testDescription"/>
@@ -13,17 +15,52 @@
         <result column="operating_description" jdbcType="CLOB" property="operatingDescription"/>
         <result column="expected_result" jdbcType="CLOB" property="expectedResult"/>
         <result column="evaluation_criteria" jdbcType="VARCHAR" property="evaluationCriteria"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="comment" jdbcType="CLOB" property="comment"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
     <sql id="BaseList">
         id, case_mark, test_track, test_method, test_description,
         premise_constraint, end_condition, operating_description,
-        expected_result, evaluation_criteria
+        expected_result, evaluation_criteria, comment
     </sql>
-    <select id="getTestCaseDesignList" resultMap="BaseResultMap">
-        SELECT <include refid="BaseList"/> FROM test_case_design
+    <select id="getAllList" resultMap="BaseResultMap">
+        SELECT * FROM test_case_design
+    </select>
+
+    <select id="getListByMark" resultMap="BaseResultMap">
+        SELECT * FROM test_case_design where case_mark like concat('%',#{caseMark},'%')
     </select>
 
     <delete id="deleteById" parameterType="Integer">
         delete from test_case_design where id = #{id}
     </delete>
+
+    <update id="updateById" parameterType="com.lam.tms.entity.TestCaseDesign">
+        update test_case_design
+        set
+            id = #{id},
+            case_mark = #{caseMark},
+            test_track = #{testTrack},
+            test_method = #{testMethod},
+            test_description = #{testDescription},
+            premise_constraint = #{premiseConstraint},
+            end_condition = #{endCondition},
+            operating_description = #{operatingDescription},
+            expected_result = #{expectedResult},
+            evaluation_criteria = #{evaluationCriteria},
+            comment = #{comment}
+        where id = #{id}
+    </update>
+
+    <insert id="createCase" parameterType="com.lam.tms.entity.TestCaseDesign">
+        insert into test_case_design (
+            <include refid="BaseList"/>
+        ) values (#{id},#{caseMark},#{testTrack},#{testMethod},
+                  #{testDescription},#{premiseConstraint},#{endCondition},
+                  #{operatingDescription},#{expectedResult},#{evaluationCriteria},#{comment}
+        )
+    </insert>
 </mapper>

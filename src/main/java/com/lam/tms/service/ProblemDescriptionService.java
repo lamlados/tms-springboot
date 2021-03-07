@@ -9,5 +9,6 @@ import java.util.List;
  * @date 2021/2/28 22:50
  */
 public interface ProblemDescriptionService {
-    List<ProblemDescription> getProblemList();
+    List<ProblemDescription> getAllList();
+    List<ProblemDescription> getListByMark(String caseMark);
 }

@@ -18,12 +18,20 @@ public class TestCaseDesignServiceImpl implements TestCaseDesignService {
     @Autowired
     private TestCaseDesignMapper testCaseDesignMapper;
     @Override
-    public List<TestCaseDesign> getTestCaseDesignList() {
-        return testCaseDesignMapper.getTestCaseDesignList();
+    public List<TestCaseDesign> getAllList() {
+        return testCaseDesignMapper.getAllList();
     }
 
     @Override
-    public int deleteById(Long id) {
-        return testCaseDesignMapper.deleteById(id);
-    }
+    public List<TestCaseDesign> getListByMark(String caseMark) { return testCaseDesignMapper.getListByMark(caseMark); }
+
+    @Override
+    public int deleteById(Integer id) { return testCaseDesignMapper.deleteById(id); }
+
+    @Override
+    public int updateById(Integer id) { return testCaseDesignMapper.updateById(id); }
+
+    @Override
+    public int createCase(TestCaseDesign newCase) { return testCaseDesignMapper.createCase(newCase); }
+
 }
