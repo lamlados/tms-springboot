@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -38,7 +37,7 @@ public class SysUserController extends BaseController<SysUser, Integer, SysUserS
     @Lazy
     private RedisTemplate<String, String> redisTemplate;
 
-    @ApiOperation(value = "分页,获取用户详情", notes = "分页 查询所有，获取用户详情")
+    @ApiOperation(value = "分页获取用户详情", notes = "分页获取用户详情")
     @GetMapping("/info/page")
     public JsonResult<Page<SysUserVo>> findAllInfoPage(QueryParameter parameter) {
         PageInfo<SysUserVo> page = baseService.findAllPageInfo(parameter);

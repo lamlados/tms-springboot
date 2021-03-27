@@ -27,7 +27,7 @@ import java.util.List;
 public class ProbelmDescriptionController {
     @Autowired
     private ProblemDescriptionService problemDescriptionService;
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @ApiOperation(value = "分页查询", notes = "问题分页查询")
     @PostMapping("/pageInfo")
     public JsonResult<PageInfo<TestCaseDesign>> getPageInfo(PageVo pageVo){
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
@@ -36,7 +36,7 @@ public class ProbelmDescriptionController {
         return JsonResult.success(pageInfo);
     }
 
-    @ApiOperation(value = "全部查询", notes = "全部查询")
+    @ApiOperation(value = "全部查询", notes = "问题全部查询")
     @GetMapping("/all")
     public JsonResult<PageInfo<ProblemDescription>> getAllList(PageVo pageVo, String problemMark){
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());

@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Slf4j
-@Api(tags = "[ 业务内容 ] 测试项目管理")
+@Api(tags = "[ 业务内容 ] 测试用例设计管理")
 @RestController
 @RequestMapping("/system/item")
 public class TestCaseDesignController {
@@ -39,7 +39,7 @@ public class TestCaseDesignController {
     @Lazy
     private RedisTemplate<String, String> redisTemplate;
 
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @ApiOperation(value = "分页查询", notes = "测试用例分页查询")
     @PostMapping("/pageInfo")
     public JsonResult<PageInfo<TestCaseDesign>> getPageInfo(PageVo pageVo){
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
@@ -48,7 +48,7 @@ public class TestCaseDesignController {
         return JsonResult.success(pageInfo);
     }
 
-    @ApiOperation(value = "全部查询", notes = "全部查询")
+    @ApiOperation(value = "全部查询", notes = "测试用例全部查询")
     @GetMapping("/all")
     public JsonResult<PageInfo<TestCaseDesign>> getAllList(PageVo pageVo, String caseMark){
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
@@ -64,7 +64,7 @@ public class TestCaseDesignController {
     }
 
 
-    @ApiOperation(value = "根据ID更新", notes = "根据ID更新")
+    @ApiOperation(value = "根据ID更新", notes = "根据ID更新测试用例")
     @PostMapping("/update")
     public JsonResult<Integer> updateById(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
@@ -73,7 +73,7 @@ public class TestCaseDesignController {
         return JsonResult.success(result);
     }
 
-    @ApiOperation(value = "根据ID删除", notes = "根据ID删除")
+    @ApiOperation(value = "根据ID删除", notes = "根据ID删除测试用例")
     @PostMapping("/delete")
     public JsonResult<Integer> deleteById(Integer id){
         int result = testCaseDesignService.deleteById(id);
@@ -87,11 +87,9 @@ public class TestCaseDesignController {
         return JsonResult.success("切换成功");
     }
 
-    @ApiOperation(value = "切换项目", notes = "切换项目")
+    @ApiOperation(value = "生成标识", notes = "根据能力点生成标识")
     @PostMapping("/generateMark")
     public JsonResult<UserVo> generateMark(String currentAbility, String currentItem) {
-
-
         return JsonResult.success("切换成功");
     }
 }
