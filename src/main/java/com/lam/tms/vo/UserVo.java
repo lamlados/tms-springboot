@@ -21,12 +21,10 @@ import java.util.Set;
 public class UserVo implements java.io.Serializable {
 
     private Integer id;
-    /**
-     * 用户名
-     */
+
     private String username;
 
-    private String testItem;
+    private String currentItem;
 
 
 }

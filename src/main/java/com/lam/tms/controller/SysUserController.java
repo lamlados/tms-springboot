@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * 用户管理 控制器
@@ -47,10 +49,12 @@ public class SysUserController extends BaseController<SysUser, Integer, SysUserS
     @GetMapping("/info")
     public JsonResult<UserVo> findUserInfo() {
         UserVo userInfo = baseService.findUserInfo();
-        String testItem = redisTemplate.opsForValue().get(userInfo.getUsername());
-        userInfo.setTestItem(testItem);
+        String currentItem = redisTemplate.opsForValue().get(userInfo.getUsername());
+        userInfo.setCurrentItem(currentItem);
         return JsonResult.success(userInfo);
     }
+
+
 
     @ApiOperation(value = "注销", notes = "注销")
     @GetMapping("/logout")

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lam.tms.mapper.DictQueryMapper">
+    <resultMap id="BaseResultMap" type="com.lam.tms.entity.DictQueryItem">
+        <result column="dict_type" jdbcType="VARCHAR" property="dictType"/>
+        <result column="dict_content" jdbcType="VARCHAR" property="dictContent"/>
+    </resultMap>
+    <resultMap id="MarkResultMap" type="com.lam.tms.entity.DictQueryItem">
+        <result column="dict_type" jdbcType="VARCHAR" property="dictType"/>
+        <result column="dict_content" jdbcType="VARCHAR" property="dictContent"/>
+        <result column="dict_mark" jdbcType="VARCHAR" property="dictMark"/>
+    </resultMap>
+
+    <select id="getNoMarkList" resultMap="BaseResultMap">
+        SELECT * FROM tms_dict_nomark where dict_type like concat('%',#{queryType},'%')
+    </select>
+
+    <select id="getMarkList" resultMap="BaseResultMap">
+        SELECT * FROM tms_dict_mark where dict_type like concat('%',#{queryType},'%')
+    </select>
+
+    <select id="getAbilityList" resultMap="MarkResultMap">
+        SELECT * FROM tms_dict_mark
+        where tms_dict_mark.dict_type
+        like concat('%',(select item_type from test_item_main where item_name = #{queryType}),'%');
+    </select>
+
+</mapper>
