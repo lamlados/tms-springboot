@@ -29,8 +29,10 @@ public class TestCaseDesignServiceImpl implements TestCaseDesignService {
     public int deleteById(Integer id) { return testCaseDesignMapper.deleteById(id); }
 
     @Override
-    public int updateById(Integer id) { return testCaseDesignMapper.updateById(id); }
+    public int updateCase(TestCaseDesign testCase) { return testCaseDesignMapper.updateCase(testCase); }
 
+    @Override
+    public int checkMark(String curMark){ return testCaseDesignMapper.checkMark(curMark); }
     @Override
     public int createCase(TestCaseDesign newCase) { return testCaseDesignMapper.createCase(newCase); }
 

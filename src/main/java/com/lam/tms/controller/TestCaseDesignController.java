@@ -69,7 +69,20 @@ public class TestCaseDesignController {
     public JsonResult<Integer> updateById(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
         System.out.println(testCaseDesign);
-        int result = testCaseDesignService.updateById(testCaseDesign.getId());
+        int result = testCaseDesignService.updateCase(testCaseDesign);
+        return JsonResult.success(result);
+    }
+
+    @ApiOperation(value = "新增用例", notes = "新增测试用例")
+    @PostMapping("/add")
+    public JsonResult<Integer> createCase(@RequestBody String json){
+        TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
+//        testCaseDesign.setId(9);
+//        testCaseDesign.setCreateBy("1");
+//        testCaseDesign.setUpdateBy("1");
+//        testCaseDesign.setComment("1");
+        System.out.println(testCaseDesign);
+        int result = testCaseDesignService.createCase(testCaseDesign);
         return JsonResult.success(result);
     }
 
@@ -87,10 +100,6 @@ public class TestCaseDesignController {
         return JsonResult.success("切换成功");
     }
 
-    @ApiOperation(value = "生成标识", notes = "根据能力点生成标识")
-    @PostMapping("/generateMark")
-    public JsonResult<UserVo> generateMark(String currentAbility, String currentItem) {
-        return JsonResult.success("切换成功");
-    }
+
 }
 

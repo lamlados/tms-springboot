@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lam.tms.mapper.TestItemClassificationMapper">
+    <resultMap id="BaseResultMap" type="com.lam.tms.entity.TestItemClassification">
+        <result column="item_mark" jdbcType="VARCHAR" property="itemMark"/>
+        <result column="big_mark" jdbcType="VARCHAR" property="bigMark"/>
+        <result column="medium_mark" jdbcType="VARCHAR" property="mediumMark"/>
+        <result column="small_mark" jdbcType="VARCHAR" property="smallMark"/>
+    </resultMap>
+
+    <select id="generateMark" resultMap="BaseResultMap">
+        SELECT * FROM test_item_classification
+        where test_item_classification.item_name = #{itemName}
+    </select>
+
+</mapper>

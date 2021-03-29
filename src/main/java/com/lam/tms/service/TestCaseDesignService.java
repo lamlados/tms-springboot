@@ -16,6 +16,7 @@ public interface TestCaseDesignService {
     List<TestCaseDesign> getAllList();
     List<TestCaseDesign> getListByMark(String caseMark);
     int deleteById(Integer id);
-    int updateById(Integer id);
+    int updateCase(TestCaseDesign testCase);
     int createCase(TestCaseDesign newCase);
+    int checkMark(String curMark);
 }

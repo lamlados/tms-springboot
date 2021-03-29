@@ -34,11 +34,15 @@
         SELECT * FROM test_case_design where case_mark like concat('%',#{caseMark},'%')
     </select>
 
+    <select id="checkMark" resultType="Integer">
+        select count(*) from test_case_design where case_mark like concat('%',#{curMark},'%')
+    </select>
+
     <delete id="deleteById" parameterType="Integer">
         delete from test_case_design where id = #{id}
     </delete>
 
-    <update id="updateById" parameterType="com.lam.tms.entity.TestCaseDesign">
+    <update id="updateCase">
         update test_case_design
         set
             id = #{id},
@@ -55,10 +59,12 @@
         where id = #{id}
     </update>
 
-    <insert id="createCase" parameterType="com.lam.tms.entity.TestCaseDesign">
+    <insert id="createCase">
         insert into test_case_design (
-            <include refid="BaseList"/>
-        ) values (#{id},#{caseMark},#{testTrack},#{testMethod},
+            item_mark, classification_mark, case_mark, test_track, test_method, test_description,
+            premise_constraint, end_condition, operating_description,
+            expected_result, evaluation_criteria, comment
+        ) values (#{itemMark},#{classificationMark},#{caseMark},#{testTrack},#{testMethod},
                   #{testDescription},#{premiseConstraint},#{endCondition},
                   #{operatingDescription},#{expectedResult},#{evaluationCriteria},#{comment}
         )

@@ -19,12 +19,14 @@ public interface TestCaseDesignMapper {
 
     int deleteById(Integer id);
 
-    int updateById(Integer id);
+    int updateCase(TestCaseDesign testCase);
 
     List<TestCaseDesign> getAllList();
 
     int createCase(TestCaseDesign newCase);
 
     List<TestCaseDesign> getListByMark(String caseMark);
+
+    int checkMark(String curMark);
 
 }

@@ -16,7 +16,7 @@
         SELECT * FROM tms_dict_nomark where dict_type like concat('%',#{queryType},'%')
     </select>
 
-    <select id="getMarkList" resultMap="BaseResultMap">
+    <select id="getMarkList" resultMap="MarkResultMap">
         SELECT * FROM tms_dict_mark where dict_type like concat('%',#{queryType},'%')
     </select>
 

@@ -38,6 +38,8 @@ public class DictController {
     @GetMapping("/abilities")
     public JsonResult<DictVo> getAbilities(String currentItem){
         List<DictQueryItem> list = dictQueryMapper.getAbilityList(currentItem);
+        System.out.println(currentItem);
+        System.out.println(list);
         return JsonResult.success(list);
     }
 
