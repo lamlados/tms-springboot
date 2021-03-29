@@ -68,7 +68,6 @@ public class TestCaseDesignController {
     @PostMapping("/update")
     public JsonResult<Integer> updateById(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
-        System.out.println(testCaseDesign);
         int result = testCaseDesignService.updateCase(testCaseDesign);
         return JsonResult.success(result);
     }
@@ -77,11 +76,6 @@ public class TestCaseDesignController {
     @PostMapping("/add")
     public JsonResult<Integer> createCase(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
-//        testCaseDesign.setId(9);
-//        testCaseDesign.setCreateBy("1");
-//        testCaseDesign.setUpdateBy("1");
-//        testCaseDesign.setComment("1");
-        System.out.println(testCaseDesign);
         int result = testCaseDesignService.createCase(testCaseDesign);
         return JsonResult.success(result);
     }

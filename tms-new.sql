@@ -1,4 +1,86 @@
 # /-- 删除时去除外键 --/
+drop table if exists `tms_dict_mark`;
+create table `tms_dict_mark`
+(
+    `dict_id`     bigint(20) not null auto_increment comment '字典序号',
+    `dict_type`   varchar(100) default '' comment '字典类型',
+    `dict_content`   varchar(100) default '' comment '字典内容',
+    `dict_mark`   varchar(100) default '' comment '字典标识',
+    `create_by`   varchar(64) comment '创建者',
+    `update_by`   varchar(64) comment '最后更新者',
+    `create_time` datetime comment '创建时间',
+    `update_time` datetime comment '最后修改时间',
+    primary key (`dict_id`),
+    unique (dict_id)
+) engine = innodb
+  DEFAULT CHARSET = utf8
+  auto_increment = 100 comment = '字典总表';
+
+insert into tms_dict_mark values(1,    '大分类1',    '设备信息管理',   'SBXX',   'admin','admin',     '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(2,    '大分类2',    '数据类型管理',   'SJLX',    'admin','admin',     '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(3,    '大分类3',    '军用设备管理',   'JYSB',    'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(4,    '大分类4',    '民用设备管理',   'MYSB',    'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(5,    '中分类1',    '视频数据',     'SPSJ',    'admin','admin',    '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(6,    '中分类2',    '音频数据',     'YPSJ',    'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(7,    '小分类1',    '日志数据',     'RZSJ',     'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(8,    '小分类2',    '文电数据',     'WDSJ',     'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(9,    '小分类3',     'I型',      'IX',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(10,   '小分类4',     'II型',     'IIX',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(11,   '军用能力点1',     '效率性',    'XL',        'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(12,   '军用能力点2',     '维护性',    'WH',        'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(13,   '军用能力点3',     '功能',     'GN',       'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(14,   '军用能力点4',     '兼容性',    'JR',       'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(15,   '军用能力点5',     '易用性',    'YY',       'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(16,   '军用能力点6',     '可移植性',   'KYZ',        'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(17,   '民用能力点1',     '兼容性',    'JR',       'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(18,   '民用能力点2',     '安全性',    'AQ',     'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(19,   '民用能力点3',     '功能',     'GN',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(20,   '民用能力点4',     '性能',     'XN',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(21,   '民用能力点5',     '接口',     'JK',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(22,   '民用能力点6',     '边界',     'BJ',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(23,   '民用能力点7',     '强度',     'QD',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(24,   '民用能力点8',     '余量',     'YL',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(25,   '民用能力点9',     '人机交互界面', 'RJ',     'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(26,   '测试项目1',     '测试管理系统',      'CSGL',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(27,   '测试项目2',     '多元监控管理系统',    'DYJK',       ' admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(28,   '测试项目3',     '用户管理系统',      'YHGL',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_mark values(29,   '测试项目4',     '用例检查系统',      'YLJC',     ' admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+
+
+drop table if exists `tms_dict_nomark`;
+create table `tms_dict_nomark`
+(
+    `dict_id`     bigint(20) not null auto_increment comment '字典序号',
+    `dict_type`   varchar(100) default '' comment '字典类型',
+    `dict_content`   varchar(100) default '' comment '字典内容',
+    `create_by`   varchar(64) comment '创建者',
+    `update_by`   varchar(64) comment '最后更新者',
+    `create_time` datetime comment '创建时间',
+    `update_time` datetime comment '最后修改时间',
+    primary key (`dict_id`),
+    unique (dict_id)
+) engine = innodb
+  DEFAULT CHARSET = utf8
+  auto_increment = 100 comment = '字典总表';
+
+insert into tms_dict_nomark values(1,   '测试方法1',     '等价分类法',      'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(2,   '测试方法2',     '边界值法',        'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(3,   '测试方法3',     '因果图法',          'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(4,   '测试方法4',     '场景法',             'admin','admin',   '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(5,   '测试方法5',     '错误推测法',            'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(6,   '问题类别1',     '设计',              'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(7,   '问题类别2',     '文档',              'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(8,   '问题类别3',     '程序',              'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(9,   '问题类别4',     '规范性问题',            'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(10,   '问题类别5',     '其他问题',            'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(11,   '问题级别1',     '致命',              'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(12,   '问题级别2',     '严重',             ' admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(13,   '问题级别3',     '一般',              'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+insert into tms_dict_nomark values(14,   '问题级别4',     '建议',             ' admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08');
+
+
+
+
 DROP TABLE IF EXISTS `tms_user`;
 CREATE TABLE IF NOT EXISTS `tms_user`
 (
@@ -151,112 +233,6 @@ CREATE TABLE IF NOT EXISTS `test_case_test`
 ) ENGINE = innoDB
   DEFAULT CHARSET = utf8
     COMMENT = '测试用例测试表';
-
-drop table if exists `tms_dict_type`;
-create table `tms_dict_type`
-(
-    `dict_id`     bigint(20) not null auto_increment comment '字典主键',
-    `dict_name`   varchar(100) default '' comment '字典名称',
-    `dict_type`   varchar(100) default '' comment '字典类型',
-    `status`      char(1)      default '0' comment '状态（0正常 1停用）',
-    `create_by`   varchar(64) comment '创建者',
-    `update_by`   varchar(64) comment '最后更新者',
-    `create_time` datetime comment '创建时间',
-    `update_time` datetime comment '最后修改时间',
-    `comment`     text comment '备注',
-    primary key (`dict_id`),
-    unique (dict_type)
-) engine = innodb
-  DEFAULT CHARSET = utf8
-  auto_increment = 100 comment = '字典类型表';
-
-insert into tms_dict_type
-values (1, '大分类', 'tms_cl_big', '0', 'admin', 'admin',       '2021-02-15 14:12:08', '2021-02-15 14:12:08','大分类列表');
-insert into tms_dict_type
-values (2, '中分类', 'tms_cl_medium', '0', 'admin', 'admin',    '2021-02-15 14:12:08', '2021-02-15 14:12:08','中分类列表');
-insert into tms_dict_type
-values (3, '小分类', 'tms_cl_small', '0', 'admin', 'admin',     '2021-02-15 14:12:08', '2021-02-15 14:12:08','小分类列表');
-insert into tms_dict_type
-values (4, '项目类型', 'tms_item_type', '0', 'admin', 'admin',   '2021-02-15 14:12:08', '2021-02-15 14:12:08','项目类型列表');
-insert into tms_dict_type
-values (5, '军用能力点', 'tms_m_ability', '0', 'admin', 'admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08','军用能力列表');
-insert into tms_dict_type
-values (6, '民用能力点', 'tms_c_ability', '0', 'admin', 'admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08','民用能力列表');
-insert into tms_dict_type
-values (7, '测试追踪', 'tms_test_track', '0', 'admin', 'admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08','测试追踪列表');
-insert into tms_dict_type
-values (8, '测试方法', 'tms_test_method', '0', 'admin', 'admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08','测试方法列表');
-insert into tms_dict_type
-values (9, '问题类别', 'tms_pb_type', '0', 'admin', 'admin',     '2021-02-15 14:12:08', '2021-02-15 14:12:08','问题类别列表');
-insert into tms_dict_type
-values (10, '问题级别', 'tms_pb_level', '0', 'admin', 'admin',   '2021-02-15 14:12:08', '2021-02-15 14:12:08', '问题级别列表');
-
-
-
-drop table if exists `tms_dict_data`;
-create table `tms_dict_data`
-(
-    `dict_code` bigint(20) not null auto_increment comment '字典编码',
-    `dict_sort` int(4)       default 0 comment '字典排序',
-    `dict_label` varchar(100) default '' comment '字典标签',
-    `dict_value` varchar(100) default '' comment '字典键值',
-    `dict_type` varchar(100) default '' comment '字典类型',
-    `is_default` char(1)      default 'N' comment '是否默认（Y是 N否）',
-    `status` char(1)      default '0' comment '状态（0正常 1停用）',
-    `create_by` varchar(64)  default '' comment '创建者',
-    `update_by` varchar(64)  default '' comment '最后更新者',
-    `create_time` datetime comment '创建时间',
-    `update_time` datetime comment '最后修改时间',
-    `comment`  text comment '备注',
-    primary key (`dict_code`)
-) engine = innodb
-  DEFAULT CHARSET = utf8
-  auto_increment = 100 comment = '字典数据表';
-
-insert into tms_dict_data values(1,  1,  '设备信息管理',       '1',       'tms_cl_big',      'Y', '0', 'admin','admin',     '2021-02-15 14:12:08', '2021-02-15 14:12:08', '大分类1');
-insert into tms_dict_data values(2,  2,  '数据类型管理',       '2',       'tms_cl_big',      'N', '0', 'admin','admin',     '2021-02-15 14:12:08', '2021-02-15 14:12:08','大分类2');
-insert into tms_dict_data values(3,  1,  '军用设备管理',       '1',       'tms_cl_medium',      'Y', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '中分类1-1');
-insert into tms_dict_data values(4,  2,  '民用设备管理',       '2',       'tms_cl_medium',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08','中分类1-2');
-insert into tms_dict_data values(5,  3,  '视频数据',       '3',       'tms_cl_medium',      'N', '0', 'admin','admin',    '2021-02-15 14:12:08', '2021-02-15 14:12:08', '中分类2-1');
-insert into tms_dict_data values(6,  4,  '音频数据',       '4',       'tms_cl_medium',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '中分类2-2');
-insert into tms_dict_data values(7,  5,  '日志数据',       '5',       'tms_cl_medium',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '中分类2-3');
-insert into tms_dict_data values(8,  6,  '文电数据',       '6',       'tms_cl_medium',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '中分类2-4');
-insert into tms_dict_data values(9,  1,   'I型',       '1',        'tms_cl_small',      'Y', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '小分类1');
-insert into tms_dict_data values(10,  2,  'II型',       '2',       'tms_cl_small',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '小分类2');
-insert into tms_dict_data values(11,  1,  '军用',       '1',       'tms_item_type',      'Y', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '项目类型1');
-insert into tms_dict_data values(12,  2,  '民用',       '2',       'tms_item_type',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '项目类型2');
-insert into tms_dict_data values(13,  1,  '功能',       '1',       'tms_m_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '军用能力点1');
-insert into tms_dict_data values(14,  2,  '兼容性',       '2',       'tms_m_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '军用能力点2');
-insert into tms_dict_data values(15,  3,  '易用性',       '3',       'tms_m_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '军用能力点3');
-insert into tms_dict_data values(16,  4,  '效率性',       '4',       'tms_m_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '军用能力点4');
-insert into tms_dict_data values(17,  5,  '维护性',       '5',       'tms_m_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '军用能力点5');
-insert into tms_dict_data values(18,  6,  '可移植性',       '6',       'tms_m_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08','军用能力点6');
-insert into tms_dict_data values(19,  1,  '功能',       '1',       'tms_c_ability',      'Y', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点1');
-insert into tms_dict_data values(20,  2,  '性能',       '2',       'tms_c_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点2');
-insert into tms_dict_data values(21,  3,  '接口',       '3',       'tms_c_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点3');
-insert into tms_dict_data values(22,  4,  '边界',       '4',       'tms_c_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点4');
-insert into tms_dict_data values(23,  5,  '强度',       '5',       'tms_c_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点5');
-insert into tms_dict_data values(24,  6,  '余量',       '6',       'tms_c_ability',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点6');
-insert into tms_dict_data values(25,  7,  '人机交互界面',       '7',       'tms_c_ability',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '民用能力点7');
-insert into tms_dict_data values(26,  1,  '测试追踪1',       '1',       'tms_test_track',      'Y', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试追踪1');
-insert into tms_dict_data values(27,  2,  '测试追踪2',       '2',       'tms_test_track',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试追踪2');
-insert into tms_dict_data values(28,  3,  '测试追踪3',       '3',       'tms_test_track',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试追踪3');
-insert into tms_dict_data values(29,  1,  '等价分类法',       '1',       'tms_test_method',      'Y', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试方法1');
-insert into tms_dict_data values(30,  2,  '边界值法',       '2',       'tms_test_method',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试方法2');
-insert into tms_dict_data values(31,  3,  '因果图法',       '3',       'tms_test_method',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试方法3');
-insert into tms_dict_data values(32,  4,  '场景法',       '4',       'tms_test_method',      'N', '0', 'admin','admin',   '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试方法4');
-insert into tms_dict_data values(33,  5,  '错误推测法',       '5',       'tms_test_method',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '测试方法5');
-insert into tms_dict_data values(34,  1,  '设计',       '1',       'tms_pb_type',      'Y', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08','问题类别1');
-insert into tms_dict_data values(35,  2,  '文档',       '2',       'tms_pb_type',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08','问题类别2');
-insert into tms_dict_data values(36,  3,  '程序',       '3',       'tms_pb_type',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08','问题类别3');
-insert into tms_dict_data values(37,  4,  '规范性问题',       '4',       'tms_pb_type',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08','问题类别4');
-insert into tms_dict_data values(38,  5,  '其他问题',       '5',       'tms_pb_type',      'N', '0', 'admin','admin',  '2021-02-15 14:12:08', '2021-02-15 14:12:08', '问题类别5');
-insert into tms_dict_data values(39,  1,  '致命',       '1',       'tms_pb_level',      'Y', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '问题级别1');
-insert into tms_dict_data values(40,  2,  '严重',       '2',       'tms_pb_level',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '问题级别2');
-insert into tms_dict_data values(41,  3,  '一般',       '3',       'tms_pb_level',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '问题级别3');
-insert into tms_dict_data values(42,  4,  '建议',       '4',       'tms_pb_level',      'N', '0', 'admin','admin', '2021-02-15 14:12:08', '2021-02-15 14:12:08', '问题级别4');
-
-
 
 
 
