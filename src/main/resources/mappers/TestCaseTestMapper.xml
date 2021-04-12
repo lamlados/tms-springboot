@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lam.tms.mapper.TestCaseTestMapper">
+    <resultMap id="BaseResultMap" type="com.lam.tms.entity.TestCaseTest">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="test_by" jdbcType="VARCHAR" property="testBy"/>
+        <result column="execution_date" jdbcType="VARCHAR" property="executionDate"/>
+        <result column="test_version" jdbcType="VARCHAR" property="testVersion"/>
+        <result column="actual_result" jdbcType="VARCHAR" property="actualResult"/>
+        <result column="execution_result" jdbcType="VARCHAR" property="executionResult"/>
+        <result column="problem_mark" jdbcType="VARCHAR" property="problemMark"/>
+    </resultMap>
+
+    <select id="getAllList" resultMap="BaseResultMap">
+        SELECT * FROM test_case_test
+    </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from test_case_test where id = #{id}
+    </delete>
+
+    <update id="updateCase">
+        update test_case_test
+        set
+            id = #{id},
+            test_by = #{testBy},
+            execution_date = #{executionDate},
+            test_version = #{testVersion},
+            actual_result = #{actualResult},
+            execution_result = #{executionResult},
+            problem_mark = #{problemMark}
+        where id = #{id}
+    </update>
+
+
+</mapper>
