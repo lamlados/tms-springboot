@@ -24,4 +24,16 @@ public class ProblemDescriptionServiceImpl implements ProblemDescriptionService 
 
     @Override
     public List<ProblemDescription> getListByMark(String caseMark) { return problemDescriptionMapper.getListByMark(caseMark); }
+
+    @Override
+    public int deleteById(Integer id) { return problemDescriptionMapper.deleteById(id); }
+
+    @Override
+    public int updateProblem(ProblemDescription problemDescription) { return problemDescriptionMapper.updateProblem(problemDescription); }
+
+    @Override
+    public int createCase(ProblemDescription newCase) { return problemDescriptionMapper.createCase(newCase); }
+
+    @Override
+    public int checkMark(String curMark) { return problemDescriptionMapper.checkMark(curMark); }
 }

@@ -22,4 +22,7 @@ public class TestCaseTestServiceImpl implements TestCaseTestService {
 
     @Override
     public List<TestCaseTest> getAllList() { return testCaseTestMapper.getAllList(); }
+
+    @Override
+    public int createCase(TestCaseTest newCase) { return testCaseTestMapper.createCase(newCase); }
 }

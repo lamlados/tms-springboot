@@ -12,4 +12,5 @@ public interface TestCaseTestService {
 
     List<TestCaseTest> getAllList();
 
+    int createCase(TestCaseTest newCase);
 }

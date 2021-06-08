@@ -11,7 +11,7 @@
 
     <select id="generateMark" resultMap="BaseResultMap">
         SELECT * FROM test_item_classification
-        where test_item_classification.item_name = #{itemName}
+        where item_name = #{itemName}
     </select>
 
 </mapper>

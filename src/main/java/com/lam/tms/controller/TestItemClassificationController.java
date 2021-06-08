@@ -35,7 +35,8 @@ public class TestItemClassificationController {
     public JsonResult<UserVo> generateMark(String currentAbility, String itemName) {
         List<TestItemClassification> markList = testItemClassificationService.generateMark(itemName);
         TestItemClassification tic = markList.get(0);
-        String curMark = tic.getItemMark() + "-" + currentAbility +  "-" + tic.getBigMark()+ "-" + tic.getMediumMark() + "-" + tic.getSmallMark();
+        String curMark = tic.getItemMark() + "-" + currentAbility +  "-" + tic.getBigMark()+ "-"
+                       + tic.getMediumMark() + "-" + tic.getSmallMark();
         System.out.println(curMark);
         int result = testCaseDesignService.checkMark(curMark);
         System.out.println(result);

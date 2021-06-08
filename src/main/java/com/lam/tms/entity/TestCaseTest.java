@@ -27,8 +27,6 @@ public class TestCaseTest extends BaseEntity implements Serializable {
     private String actualResult;
     /**执行结果*/
     private String executionResult;
-    /**问题标识*/
-    private String problemMark;
     /**测试人员*/
     private String testBy;
     /**监督人员*/

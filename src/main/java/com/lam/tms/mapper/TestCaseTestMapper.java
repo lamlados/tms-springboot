@@ -15,4 +15,7 @@ public interface TestCaseTestMapper {
 
     List<TestCaseTest> getAllList();
 
+    int createCase(TestCaseTest newCase);
+
+
 }

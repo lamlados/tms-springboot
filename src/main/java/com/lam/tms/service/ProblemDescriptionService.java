@@ -11,4 +11,8 @@ import java.util.List;
 public interface ProblemDescriptionService {
     List<ProblemDescription> getAllList();
     List<ProblemDescription> getListByMark(String caseMark);
+    int deleteById(Integer id);
+    int updateProblem(ProblemDescription problemDescription);
+    int createCase(ProblemDescription newCase);
+    int checkMark(String curMark);
 }

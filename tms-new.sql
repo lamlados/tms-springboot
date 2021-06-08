@@ -124,21 +124,20 @@ DROP TABLE IF EXISTS `test_item_classification`;
 CREATE TABLE IF NOT EXISTS `test_item_classification`
 (
     `id`                    int unsigned  NOT NULL auto_increment COMMENT '序号',
+    `item_name`             varchar(128)  NOT NULL COMMENT '项目名称',
     `item_mark`             varchar(128)  NOT NULL COMMENT '项目标识',
-    `item_ability`          varchar(16)   NOT NULL COMMENT '项目能力点',
     `classification_big`    varchar(128) COMMENT '大分类',
     `big_mark`              varchar(128) COMMENT '大分类标识',
     `classification_medium` varchar(128) COMMENT '中分类',
     `medium_mark`           varchar(128) COMMENT '中分类标识',
     `classification_small`  varchar(128) COMMENT '小分类',
     `small_mark`            varchar(128) COMMENT '小分类标识',
-    `classification_mark`   varchar(1024) NOT NULL COMMENT '分类标识',
     `create_by`             varchar(64) COMMENT '创建者',
     `update_by`             varchar(64) COMMENT '最后更新者',
     `create_time`           datetime COMMENT '创建时间',
     `update_time`           datetime COMMENT '最后更新时间',
     `comment`               text COMMENT '备注',
-    PRIMARY KEY (`classification_mark`),
+    PRIMARY KEY (`id`),
     FOREIGN KEY (`item_mark`) REFERENCES test_item_main (item_mark),
     FOREIGN KEY (`create_by`) REFERENCES tms_user (username),
     FOREIGN KEY (`update_by`) REFERENCES tms_user (username),
@@ -172,12 +171,38 @@ CREATE TABLE IF NOT EXISTS `test_case_design`
     FOREIGN KEY (`create_by`) REFERENCES tms_user (username),
     FOREIGN KEY (`update_by`) REFERENCES tms_user (username),
     FOREIGN KEY (`item_mark`) REFERENCES test_item_main (item_mark),
-    FOREIGN KEY (`classification_mark`) REFERENCES test_item_classification (classification_mark),
     UNIQUE (id),
     UNIQUE (case_mark)
 ) ENGINE = innoDB
   DEFAULT CHARSET = utf8
     COMMENT = '测试用例设计表';
+
+DROP TABLE IF EXISTS `test_case_test`;
+CREATE TABLE IF NOT EXISTS `test_case_test`
+(
+    `id`               int unsigned NOT NULL auto_increment COMMENT '序号',
+    `item_mark`        varchar(128) NOT NULL COMMENT '项目标识',
+    `case_mark`        int unsigned NOT NULL COMMENT '用例标识',
+    `test_version`     varchar(32)  NOT NULL COMMENT '测试版本',
+    `actual_result`    text         NOT NULL COMMENT '实际测试结果',
+    `execution_result` varchar(16)  NOT NULL COMMENT '执行结果',
+    `test_by`          varchar(64)  NOT NULL COMMENT '测试人员',
+    `supervised_by`    varchar(64)  NOT NULL COMMENT '测试监督员',
+    `execution_date`   datetime     NOT NULL COMMENT '执行日期',
+    `create_by`        varchar(64) COMMENT '创建者',
+    `update_by`        varchar(64) COMMENT '最后更新者',
+    `create_time`      datetime COMMENT '创建时间',
+    `update_time`      datetime COMMENT '最后修改时间',
+    `comment`          text COMMENT '备注',
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`create_by`) REFERENCES tms_user (username),
+    FOREIGN KEY (`update_by`) REFERENCES tms_user (username),
+    FOREIGN KEY (`item_mark`) REFERENCES test_item_main (item_mark),
+    FOREIGN KEY (`case_mark`) REFERENCES test_case_design (id),
+    UNIQUE (id)
+) ENGINE = innoDB
+  DEFAULT CHARSET = utf8
+    COMMENT = '测试用例测试表';
 
 DROP TABLE IF EXISTS `problem_description`;
 CREATE TABLE IF NOT EXISTS `problem_description`
@@ -194,45 +219,18 @@ CREATE TABLE IF NOT EXISTS `problem_description`
     `create_time`         datetime COMMENT '创建时间',
     `update_time`         datetime COMMENT '最后修改时间',
     `comment`             text COMMENT '备注',
-    PRIMARY KEY (`problem_mark`),
+    PRIMARY KEY (`id`),
     FOREIGN KEY (`create_by`) REFERENCES tms_user (username),
     FOREIGN KEY (`update_by`) REFERENCES tms_user (username),
     FOREIGN KEY (`item_mark`) REFERENCES test_item_main (item_mark),
-    FOREIGN KEY (`case_number`) REFERENCES test_case_design (id),
+    FOREIGN KEY (`case_number`) REFERENCES test_case_test (id),
     UNIQUE (id),
     UNIQUE (problem_mark)
 ) ENGINE = innoDB
   DEFAULT CHARSET = utf8
     COMMENT = '问题描述表';
 
-DROP TABLE IF EXISTS `test_case_test`;
-CREATE TABLE IF NOT EXISTS `test_case_test`
-(
-    `id`               int unsigned NOT NULL auto_increment COMMENT '序号',
-    `item_mark`        varchar(128) NOT NULL COMMENT '项目标识',
-    `case_mark`        int unsigned NOT NULL COMMENT '用例标识',
-    `test_version`     varchar(32)  NOT NULL COMMENT '测试版本',
-    `actual_result`    text         NOT NULL COMMENT '实际测试结果',
-    `execution_result` varchar(16)  NOT NULL COMMENT '执行结果',
-    `problem_mark`     varchar(128) COMMENT '问题标识',
-    `test_by`          varchar(64)  NOT NULL COMMENT '测试人员',
-    `supervised_by`    varchar(64)  NOT NULL COMMENT '测试监督员',
-    `execution_date`   datetime     NOT NULL COMMENT '执行日期',
-    `create_by`        varchar(64) COMMENT '创建者',
-    `update_by`        varchar(64) COMMENT '最后更新者',
-    `create_time`      datetime COMMENT '创建时间',
-    `update_time`      datetime COMMENT '最后修改时间',
-    `comment`          text COMMENT '备注',
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`create_by`) REFERENCES tms_user (username),
-    FOREIGN KEY (`update_by`) REFERENCES tms_user (username),
-    FOREIGN KEY (`item_mark`) REFERENCES test_item_main (item_mark),
-    FOREIGN KEY (`case_mark`) REFERENCES test_case_design (id),
-    FOREIGN KEY (`problem_mark`) REFERENCES problem_description (problem_mark),
-    UNIQUE (id)
-) ENGINE = innoDB
-  DEFAULT CHARSET = utf8
-    COMMENT = '测试用例测试表';
+
 
 
 
@@ -263,16 +261,27 @@ INSERT INTO test_item_main (id, item_mark, item_name, item_type, create_by, upda
 VALUES (4, 'YHGL', '用户管理系统', '民用', 'lamlados', 'colanexo', '2021-02-13 12:03:00', '2021-02-15 12:00:04',
         '第二个测试项目。 The second test item.');
 
-INSERT INTO test_item_classification (id, item_mark, item_ability, classification_big, big_mark, classification_medium,
-                                      medium_mark, classification_small, small_mark, classification_mark, create_by,
+INSERT INTO test_item_classification (id, item_name, item_mark, classification_big, big_mark, classification_medium,
+                                      medium_mark, classification_small, small_mark,create_by,
                                       update_by, create_time, update_time, comment)
-VALUES (1, 'DYJK', '兼容性', '设备信息管理', 'SBXX', '军用设备管理', 'JYSB', 'I型', 'IX', 'DYJK-JRX-SBXX-JYSB-IX', 'lamlados', 'lamlados',
+VALUES (1, '测试管理系统','CSGL',  '设备信息管理', 'SBXX', '军用设备管理', 'JYSB', 'I型', 'IX', 'lamlados', 'lamlados',
         '2021-02-15 13:50:30', '2021-02-15 13:50:36', '项目分类第一条。 This is item classification.');
-INSERT INTO test_item_classification (id, item_mark, item_ability, classification_big, big_mark, classification_medium,
-                                      medium_mark, classification_small, small_mark, classification_mark, create_by,
+INSERT INTO test_item_classification (id,item_name, item_mark, classification_big, big_mark, classification_medium,
+                                      medium_mark, classification_small, small_mark,  create_by,
                                       update_by, create_time, update_time, comment)
-VALUES (2, 'CSGL', '性能', '数据类型管理', 'SJLX', '民用设备管理', 'MYSB', 'II型', 'IIX', 'CSGL-XN-SJLX-MYSB-IIX', 'rcyrcyrcy', 'lamlados',
+VALUES (2, '多元监控管理系统','DYJK' ,'数据类型管理', 'SJLX', '民用设备管理', 'MYSB', 'II型', 'IIX', 'rcyrcyrcy', 'lamlados',
         '2021-02-15 13:50:30', '2021-02-15 13:50:36', '项目分类第二条。 This is item classification 2.');
+INSERT INTO test_item_classification (id,item_name, item_mark, classification_big, big_mark, classification_medium,
+                                      medium_mark, classification_small, small_mark,  create_by,
+                                      update_by, create_time, update_time, comment)
+VALUES (3, '用户管理系统','YHGL' ,'数据类型管理', 'SJLX', '民用设备管理', 'MYSB', 'II型', 'IIX', 'rcyrcyrcy', 'lamlados',
+        '2021-02-15 13:50:30', '2021-02-15 13:50:36', '项目分类第二条。 This is item classification 2.');
+INSERT INTO test_item_classification (id,item_name, item_mark, classification_big, big_mark, classification_medium,
+                                      medium_mark, classification_small, small_mark,  create_by,
+                                      update_by, create_time, update_time, comment)
+VALUES (4, '用例检查系统','YLJC' ,'数据类型管理', 'SJLX', '民用设备管理', 'MYSB', 'II型', 'IIX', 'rcyrcyrcy', 'lamlados',
+        '2021-02-15 13:50:30', '2021-02-15 13:50:36', '项目分类第二条。 This is item classification 2.');
+
 
 INSERT INTO test_case_design (id, item_mark, classification_mark, case_mark, test_track, test_method, test_description,
                               premise_constraint, end_condition, operating_description, expected_result,
@@ -341,6 +350,16 @@ VALUES (11, 'CSGL', 'CSGL-XN-SJLX-MYSB-IIX', 'CSGL-XN-SJLX-MYSB-IIX-10', '测试
 异常终止条件', '不可放入图片的说明。', '不可放入图片的预期结果。', '测试用例正常终止且与预期输出一致则通过。', 'lamlados',
         'lamlados', '2021-02-15 14:06:18', '2021-02-15 14:26:23', '用例设计2。');
 
+INSERT INTO test_case_test (id, item_mark, case_mark, test_version, actual_result, execution_result,
+                            test_by, supervised_by, execution_date, create_by, update_by, create_time, update_time,
+                            comment)
+VALUES (1, 'DYJK', 1, '1.0.0', '可加附件的实际结果。', '执行结果。通过或否。',  'Someone', 'Somebody', '2021-02-15 14:11:54',
+        'lamlados', 'lamlados', '2021-02-15 14:12:08', '2021-02-15 14:12:12', '用例测试。');
+INSERT INTO test_case_test (id, item_mark, case_mark, test_version, actual_result, execution_result,
+                            test_by, supervised_by, execution_date, create_by, update_by, create_time, update_time,
+                            comment)
+VALUES (2, 'CSGL', 2, '1.1.0', '不可加附件的实际结果。', '执行结果。通过。',  'Anyone', 'Anybody', '2021-02-12 14:11:54',
+        'rcyrcyrcy', 'rcyrcyrcy', '2021-02-15 14:12:08', '2021-02-15 14:12:12', '用例测试2。');
 
 INSERT INTO problem_description (id, item_mark, problem_mark, case_number, problem_type, problem_level,
                                  problem_description, create_by, update_by, create_time, update_time, comment)
@@ -351,16 +370,7 @@ INSERT INTO problem_description (id, item_mark, problem_mark, case_number, probl
 VALUES (2, 'CSGL', 'CSGL-XN-SJLX-MYSB-IIX-2', 1, '规范问题', '严重', '不可放入图片的描述。', 'lamlados', 'rcyrcyrcy', '2021-02-15 14:16:11',
         '2021-02-15 14:16:14', '问题描述2。');
 
-INSERT INTO test_case_test (id, item_mark, case_mark, test_version, actual_result, execution_result, problem_mark,
-                            test_by, supervised_by, execution_date, create_by, update_by, create_time, update_time,
-                            comment)
-VALUES (1, 'DYJK', 1, '1.0.0', '可加附件的实际结果。', '执行结果。通过或否。', 'DYJK-JRX-SBXX-JYSB-IX-1', 'Someone', 'Somebody', '2021-02-15 14:11:54',
-        'lamlados', 'lamlados', '2021-02-15 14:12:08', '2021-02-15 14:12:12', '用例测试。');
-INSERT INTO test_case_test (id, item_mark, case_mark, test_version, actual_result, execution_result, problem_mark,
-                            test_by, supervised_by, execution_date, create_by, update_by, create_time, update_time,
-                            comment)
-VALUES (2, 'CSGL', 2, '1.1.0', '不可加附件的实际结果。', '执行结果。通过。', 'CSGL-XN-SJLX-MYSB-IIX-2', 'Anyone', 'Anybody', '2021-02-12 14:11:54',
-        'rcyrcyrcy', 'rcyrcyrcy', '2021-02-15 14:12:08', '2021-02-15 14:12:12', '用例测试2。');
+
 
 
 

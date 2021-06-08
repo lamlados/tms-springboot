@@ -4,12 +4,19 @@
 <mapper namespace="com.lam.tms.mapper.TestCaseTestMapper">
     <resultMap id="BaseResultMap" type="com.lam.tms.entity.TestCaseTest">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="item_mark" jdbcType="VARCHAR" property="itemMark"/>
+        <result column="case_mark" jdbcType="VARCHAR" property="caseMark"/>
         <result column="test_by" jdbcType="VARCHAR" property="testBy"/>
+        <result column="supervised_by" jdbcType="VARCHAR" property="supervisedBy"/>
         <result column="execution_date" jdbcType="VARCHAR" property="executionDate"/>
         <result column="test_version" jdbcType="VARCHAR" property="testVersion"/>
         <result column="actual_result" jdbcType="VARCHAR" property="actualResult"/>
         <result column="execution_result" jdbcType="VARCHAR" property="executionResult"/>
-        <result column="problem_mark" jdbcType="VARCHAR" property="problemMark"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="comment" jdbcType="CLOB" property="comment"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
     <select id="getAllList" resultMap="BaseResultMap">
@@ -24,14 +31,22 @@
         update test_case_test
         set
             id = #{id},
-            test_by = #{testBy},
+            item_mark = #{itemMark},
+            case_mark = #{caseMark},
             execution_date = #{executionDate},
             test_version = #{testVersion},
             actual_result = #{actualResult},
-            execution_result = #{executionResult},
-            problem_mark = #{problemMark}
+            execution_result = #{executionResult}
         where id = #{id}
     </update>
 
-
+    <insert id="createCase">
+        insert into test_case_test (
+            item_mark, case_mark, test_version, actual_result, execution_result,
+            test_by, supervised_by, execution_date, comment
+        ) values (#{itemMark},#{caseMark},#{testVersion},#{actualResult},
+                  #{executionResult},#{testBy},
+                  #{supervisedBy},#{executionDate},#{comment}
+                 )
+    </insert>
 </mapper>

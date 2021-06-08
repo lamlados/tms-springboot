@@ -4,6 +4,7 @@
 <mapper namespace="com.lam.tms.mapper.ProblemDescriptionMapper">
     <resultMap id="BaseResultMap" type="com.lam.tms.entity.ProblemDescription">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="item_mark" jdbcType="VARCHAR" property="itemMark"/>
         <result column="problem_mark" jdbcType="VARCHAR" property="problemMark"/>
         <result column="problem_type" jdbcType="VARCHAR" property="problemType"/>
         <result column="problem_level" jdbcType="VARCHAR" property="problemLevel"/>
@@ -19,7 +20,7 @@
         </association>
     </resultMap>
     <sql id="MergeList">
-        problem_description.id, problem_description.problem_mark, problem_type, problem_level, problem_description, case_number, problem_description.comment,
+        problem_description.id, problem_description.item_mark, problem_description.problem_mark, problem_description.case_number, problem_type, problem_level, problem_description, problem_description.comment,
     test_version, test_by, supervised_by, execution_date
     </sql>
     <select id="getAllList" resultMap="BaseResultMap">
@@ -33,4 +34,36 @@
             where problem_description.problem_mark like concat('%',#{problemMark},'%')
             order by id
     </select>
+
+    <insert id="createCase">
+        insert into problem_description (
+            item_mark, problem_mark, case_number, problem_type, problem_level, problem_description, comment
+        ) values (#{itemMark},#{problemMark},#{caseNumber},#{problemType},#{problemLevel},
+                  #{problemDescription},#{comment}
+                 )
+    </insert>
+
+    <select id="checkMark" resultType="Integer">
+        select count(*) from problem_description where problem_mark like concat('%',#{curMark},'%')
+    </select>
+
+    <update id="updateProblem">
+        update problem_description pd
+#         left join test_cast_test tct
+#         on pd.case_number = tct.id
+        set
+            pd.id = #{id},
+            pd.item_mark = #{itemMark},
+            pd.problem_mark = #{problemMark},
+            pd.case_number = #{caseNumber},
+            pd.problem_type = #{problemType},
+            pd.problem_level = #{problemLevel},
+            pd.problem_description = #{problemDescription},
+            pd.comment = #{comment}
+        where pd.id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from problem_description where id = #{id}
+    </delete>
 </mapper>

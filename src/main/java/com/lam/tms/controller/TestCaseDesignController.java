@@ -11,12 +11,22 @@ import com.lam.tms.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -76,6 +86,9 @@ public class TestCaseDesignController {
     @PostMapping("/add")
     public JsonResult<Integer> createCase(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
+        String testDescription = redisTemplate.opsForValue().get("testDescription");
+        String s = testDescription.replaceAll("D:/Resources/Projects/tms-web/src/views/system", ".");
+        testCaseDesign.setTestDescription(s);
         int result = testCaseDesignService.createCase(testCaseDesign);
         return JsonResult.success(result);
     }
@@ -92,6 +105,25 @@ public class TestCaseDesignController {
     public JsonResult<UserVo> switchItem(String user, String currentItem) {
         redisTemplate.opsForValue().set(user, currentItem, 10, TimeUnit.MINUTES);
         return JsonResult.success("切换成功");
+    }
+
+    @ApiOperation(value = "图片接收", notes = "图片接收")
+    @PostMapping("/uploadPic")
+    public JsonResult<Integer> uploadPic(MultipartFile file) throws IOException, SQLException {
+
+//        Blob blob = new javax.sql.rowset.serial.SerialBlob(file.getBytes());
+//        System.out.println(blob);
+        String str = "abcdefghijklmnopqrstuvwxyz";
+        StringBuffer sb = new StringBuffer();
+        int len = str.length();
+        for (int i = 0; i < 8; i++) {
+            sb.append(str.charAt((int) Math.round(Math.random() * (len-1))));
+        }
+        String picUrl = "D:/Resources/Projects/tms-web/src/views/system/test_descriptions/"+sb+".png";
+        File f = new File(picUrl);
+        file.transferTo(f);
+        redisTemplate.opsForValue().set("testDescription", picUrl, 10, TimeUnit.MINUTES);
+        return JsonResult.success(1);
     }
 
 
