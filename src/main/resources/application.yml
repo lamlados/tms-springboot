@@ -10,6 +10,11 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     default-property-inclusion: non_null
+  mvc:
+    static-path-pattern: /image/**
+  web:
+    resources:
+      static-locations: file:E://static/
 
 
 # spring boot mybatis 自动配置

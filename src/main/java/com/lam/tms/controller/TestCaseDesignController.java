@@ -78,6 +78,9 @@ public class TestCaseDesignController {
     @PostMapping("/update")
     public JsonResult<Integer> updateById(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
+        String testDescription = redisTemplate.opsForValue().get("testDescription");
+        String s = testDescription.replaceAll("E:/static", "http://localhost:8090/image");
+        testCaseDesign.setTestDescription(s);
         int result = testCaseDesignService.updateCase(testCaseDesign);
         return JsonResult.success(result);
     }
@@ -87,7 +90,7 @@ public class TestCaseDesignController {
     public JsonResult<Integer> createCase(@RequestBody String json){
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
         String testDescription = redisTemplate.opsForValue().get("testDescription");
-        String s = testDescription.replaceAll("D:/Resources/Projects/tms-web/src/views/system", ".");
+        String s = testDescription.replaceAll("E:/static", "http://localhost:8090/image");
         testCaseDesign.setTestDescription(s);
         int result = testCaseDesignService.createCase(testCaseDesign);
         return JsonResult.success(result);
@@ -107,23 +110,17 @@ public class TestCaseDesignController {
         return JsonResult.success("切换成功");
     }
 
-    @ApiOperation(value = "图片接收", notes = "图片接收")
+    @ApiOperation(value = "图片上传", notes = "图片上传")
     @PostMapping("/uploadPic")
-    public JsonResult<Integer> uploadPic(MultipartFile file) throws IOException, SQLException {
-
-//        Blob blob = new javax.sql.rowset.serial.SerialBlob(file.getBytes());
-//        System.out.println(blob);
-        String str = "abcdefghijklmnopqrstuvwxyz";
-        StringBuffer sb = new StringBuffer();
-        int len = str.length();
-        for (int i = 0; i < 8; i++) {
-            sb.append(str.charAt((int) Math.round(Math.random() * (len-1))));
-        }
-        String picUrl = "D:/Resources/Projects/tms-web/src/views/system/test_descriptions/"+sb+".png";
+    public JsonResult<Integer> uploadPic(MultipartFile file) throws IOException {
+        String originalFilename = file.getOriginalFilename();
+        int length = originalFilename.length();
+        String finalFilename = originalFilename.substring(0,length-4);;
+        String picUrl = "E:/static/"+finalFilename+".png";
         File f = new File(picUrl);
         file.transferTo(f);
         redisTemplate.opsForValue().set("testDescription", picUrl, 10, TimeUnit.MINUTES);
-        return JsonResult.success(1);
+        return JsonResult.success("上传成功");
     }
 
 
