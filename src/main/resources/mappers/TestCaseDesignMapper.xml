@@ -27,46 +27,51 @@
         expected_result, evaluation_criteria, comment
     </sql>
     <select id="getAllList" resultMap="BaseResultMap">
-        SELECT * FROM test_case_design
+        SELECT *
+        FROM test_case_design
     </select>
 
     <select id="getListByMark" resultMap="BaseResultMap">
-        SELECT * FROM test_case_design where case_mark like concat('%',#{caseMark},'%')
+        SELECT *
+        FROM test_case_design
+        where case_mark like concat('%', #{caseMark}, '%')
     </select>
 
     <select id="checkMark" resultType="Integer">
-        select count(*) from test_case_design where case_mark like concat('%',#{curMark},'%')
+        select count(*)
+        from test_case_design
+        where case_mark like concat('%', #{curMark}, '%')
     </select>
 
     <delete id="deleteById" parameterType="Integer">
-        delete from test_case_design where id = #{id}
+        delete
+        from test_case_design
+        where id = #{id}
     </delete>
 
     <update id="updateCase">
         update test_case_design
-        set
-            id = #{id},
-            case_mark = #{caseMark},
-            test_track = #{testTrack},
-            test_method = #{testMethod},
-            test_description = #{testDescription},
-            premise_constraint = #{premiseConstraint},
-            end_condition = #{endCondition},
+        set id                    = #{id},
+            case_mark             = #{caseMark},
+            test_track            = #{testTrack},
+            test_method           = #{testMethod},
+            test_description      = #{testDescription},
+            premise_constraint    = #{premiseConstraint},
+            end_condition         = #{endCondition},
             operating_description = #{operatingDescription},
-            expected_result = #{expectedResult},
-            evaluation_criteria = #{evaluationCriteria},
-            comment = #{comment}
+            expected_result       = #{expectedResult},
+            evaluation_criteria   = #{evaluationCriteria},
+            comment               = #{comment}
         where id = #{id}
     </update>
 
     <insert id="createCase">
-        insert into test_case_design (
-            item_mark, classification_mark, case_mark, test_track, test_method, test_description,
-            premise_constraint, end_condition, operating_description,
-            expected_result, evaluation_criteria, comment
-        ) values (#{itemMark},#{classificationMark},#{caseMark},#{testTrack},#{testMethod},
-                  #{testDescription},#{premiseConstraint},#{endCondition},
-                  #{operatingDescription},#{expectedResult},#{evaluationCriteria},#{comment}
-        )
+        insert into test_case_design (item_mark, classification_mark, case_mark, test_track, test_method,
+                                      test_description,
+                                      premise_constraint, end_condition, operating_description,
+                                      expected_result, evaluation_criteria, comment)
+        values (#{itemMark}, #{classificationMark}, #{caseMark}, #{testTrack}, #{testMethod},
+                #{testDescription}, #{premiseConstraint}, #{endCondition},
+                #{operatingDescription}, #{expectedResult}, #{evaluationCriteria}, #{comment})
     </insert>
 </mapper>

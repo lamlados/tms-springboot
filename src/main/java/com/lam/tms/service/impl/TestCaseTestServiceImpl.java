@@ -15,14 +15,23 @@ public class TestCaseTestServiceImpl implements TestCaseTestService {
     private TestCaseTestMapper testCaseTestMapper;
 
     @Override
-    public int deleteById(Integer id) { return testCaseTestMapper.deleteById(id); }
+    public int deleteById(Integer id) {
+        return testCaseTestMapper.deleteById(id);
+    }
 
     @Override
-    public int updateCase(TestCaseTest testCase) { return testCaseTestMapper.updateCase(testCase); }
+    public int updateCase(TestCaseTest testCase) {
+        return testCaseTestMapper.updateCase(testCase);
+    }
 
     @Override
-    public List<TestCaseTest> getAllList() { return testCaseTestMapper.getAllList(); }
+    public List<TestCaseTest> getAllList() {
+        return testCaseTestMapper.getAllList();
+    }
 
     @Override
-    public int createCase(TestCaseTest newCase) { return testCaseTestMapper.createCase(newCase); }
+    public int createCase(TestCaseTest newCase) {
+        return testCaseTestMapper.createCase(newCase);
+    }
+
 }

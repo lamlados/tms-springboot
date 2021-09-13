@@ -13,17 +13,22 @@
     </resultMap>
 
     <select id="getNoMarkList" resultMap="BaseResultMap">
-        SELECT * FROM tms_dict_nomark where dict_type like concat('%',#{queryType},'%')
+        SELECT *
+        FROM tms_dict_nomark
+        where dict_type like concat('%', #{queryType}, '%')
     </select>
 
     <select id="getMarkList" resultMap="MarkResultMap">
-        SELECT * FROM tms_dict_mark where dict_type like concat('%',#{queryType},'%')
+        SELECT *
+        FROM tms_dict_mark
+        where dict_type like concat('%', #{queryType}, '%')
     </select>
 
     <select id="getAbilityList" resultMap="MarkResultMap">
-        SELECT * FROM tms_dict_mark
+        SELECT *
+        FROM tms_dict_mark
         where tms_dict_mark.dict_type
-        like concat('%',(select item_type from test_item_main where item_name = #{queryType}),'%');
+                  like concat('%', (select item_type from test_item_main where item_name = #{queryType}), '%');
     </select>
 
 </mapper>

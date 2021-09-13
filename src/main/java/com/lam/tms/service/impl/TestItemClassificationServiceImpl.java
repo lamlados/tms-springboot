@@ -14,10 +14,14 @@ import java.util.List;
  */
 @Service
 public class TestItemClassificationServiceImpl implements TestItemClassificationService {
+
     @Autowired
     TestItemClassificationMapper testItemClassificationMapper;
+
     @Override
-    public List<TestItemClassification> generateMark(String itemName){
+    public List<TestItemClassification> generateMark(String itemName) {
         return testItemClassificationMapper.generateMark(itemName);
-    };
+    }
+
+
 }

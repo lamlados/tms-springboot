@@ -20,50 +20,58 @@
         </association>
     </resultMap>
     <sql id="MergeList">
-        problem_description.id, problem_description.item_mark, problem_description.problem_mark, problem_description.case_number, problem_type, problem_level, problem_description, problem_description.comment,
-    test_version, test_by, supervised_by, execution_date
+        problem_description.id, problem_description.item_mark,
+        problem_description.problem_mark, problem_description.case_number,
+        problem_type, problem_level, problem_description, problem_description.comment,
+        test_version, test_by, supervised_by, execution_date
     </sql>
     <select id="getAllList" resultMap="BaseResultMap">
-        SELECT <include refid="MergeList"/> FROM problem_description
-            left join test_case_test tct on problem_description.case_number = tct.id order by id
+        SELECT
+        <include refid="MergeList"/>
+        FROM problem_description
+        left join test_case_test tct on problem_description.case_number = tct.id order by id
     </select>
 
     <select id="getListByMark" resultMap="BaseResultMap">
-        SELECT <include refid="MergeList"/> FROM problem_description
-            left join test_case_test tct on problem_description.case_number = tct.id
-            where problem_description.problem_mark like concat('%',#{problemMark},'%')
-            order by id
+        SELECT
+        <include refid="MergeList"/>
+        FROM problem_description
+        left join test_case_test tct on problem_description.case_number = tct.id
+        where problem_description.problem_mark like concat('%',#{problemMark},'%')
+        order by id
     </select>
 
     <insert id="createCase">
-        insert into problem_description (
-            item_mark, problem_mark, case_number, problem_type, problem_level, problem_description, comment
-        ) values (#{itemMark},#{problemMark},#{caseNumber},#{problemType},#{problemLevel},
-                  #{problemDescription},#{comment}
-                 )
+        insert into problem_description (item_mark, problem_mark, case_number, problem_type, problem_level,
+                                         problem_description, comment)
+        values (#{itemMark}, #{problemMark}, #{caseNumber}, #{problemType}, #{problemLevel},
+                #{problemDescription}, #{comment})
     </insert>
 
     <select id="checkMark" resultType="Integer">
-        select count(*) from problem_description where problem_mark like concat('%',#{curMark},'%')
+        select count(*)
+        from problem_description
+        where problem_mark like concat('%', #{curMark}, '%')
     </select>
 
     <update id="updateProblem">
         update problem_description pd
 #         left join test_cast_test tct
 #         on pd.case_number = tct.id
-        set
-            pd.id = #{id},
-            pd.item_mark = #{itemMark},
-            pd.problem_mark = #{problemMark},
-            pd.case_number = #{caseNumber},
-            pd.problem_type = #{problemType},
-            pd.problem_level = #{problemLevel},
+        set pd.id                  = #{id},
+            pd.item_mark           = #{itemMark},
+            pd.problem_mark        = #{problemMark},
+            pd.case_number         = #{caseNumber},
+            pd.problem_type        = #{problemType},
+            pd.problem_level       = #{problemLevel},
             pd.problem_description = #{problemDescription},
-            pd.comment = #{comment}
+            pd.comment             = #{comment}
         where pd.id = #{id}
     </update>
 
     <delete id="deleteById" parameterType="Integer">
-        delete from problem_description where id = #{id}
+        delete
+        from problem_description
+        where id = #{id}
     </delete>
 </mapper>

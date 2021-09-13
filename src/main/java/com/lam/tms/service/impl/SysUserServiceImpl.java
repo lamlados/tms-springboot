@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 
 /**
  * 用户Service 实现类
+ *
  * @author lamlados
  * @date 2021/2/20 15:26
  */
@@ -85,9 +86,10 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser, Integer, SysUse
     }
 
     @Override
-    public SysUser findUser(SysUser user){
+    public SysUser findUser(SysUser user) {
         return userMapper.findByUsername(user.getUsername());
     }
+
     @Override
     public JwtUser validateUsername(String username) {
         return (JwtUser) tokenStorage().get(username);
@@ -128,8 +130,5 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser, Integer, SysUse
         result.setPageNum(pageInfo.getPageNum());
         return result;
     }
-
-
-
 
 }

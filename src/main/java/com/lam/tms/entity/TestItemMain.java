@@ -18,18 +18,34 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 public class TestItemMain extends BaseEntity implements Serializable {
-    /**序号*/
+
+    /**
+     * 序号
+     */
     private Integer id;
-    /**项目标识*/
+    /**
+     * 项目标识
+     */
     private String itemMark;
-    /**项目名称*/
+    /**
+     * 项目名称
+     */
     private String itemName;
-    /**项目类别*/
+    /**
+     * 项目类别
+     */
     private String itemType;
-    /**创建者*/
+    /**
+     * 创建者
+     */
     private String createBy;
-    /**最后更新者*/
+    /**
+     * 最后更新者
+     */
     private String updateBy;
-    /**备注*/
+    /**
+     * 备注
+     */
     private String comment;
+
 }

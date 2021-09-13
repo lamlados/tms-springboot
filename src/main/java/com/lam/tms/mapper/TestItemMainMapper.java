@@ -16,6 +16,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TestItemMainMapper extends BaseMapper<TestItemMain, Integer> {
+
     List<TestItemMain> getTestItemMainList();
+
     List<String> getNameList();
+
 }

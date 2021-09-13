@@ -20,33 +20,33 @@
     </resultMap>
 
     <select id="getAllList" resultMap="BaseResultMap">
-        SELECT * FROM test_case_test
+        SELECT *
+        FROM test_case_test
     </select>
 
     <delete id="deleteById" parameterType="Integer">
-        delete from test_case_test where id = #{id}
+        delete
+        from test_case_test
+        where id = #{id}
     </delete>
 
     <update id="updateCase">
         update test_case_test
-        set
-            id = #{id},
-            item_mark = #{itemMark},
-            case_mark = #{caseMark},
-            execution_date = #{executionDate},
-            test_version = #{testVersion},
-            actual_result = #{actualResult},
+        set id               = #{id},
+            item_mark        = #{itemMark},
+            case_mark        = #{caseMark},
+            execution_date   = #{executionDate},
+            test_version     = #{testVersion},
+            actual_result    = #{actualResult},
             execution_result = #{executionResult}
         where id = #{id}
     </update>
 
     <insert id="createCase">
-        insert into test_case_test (
-            item_mark, case_mark, test_version, actual_result, execution_result,
-            test_by, supervised_by, execution_date, comment
-        ) values (#{itemMark},#{caseMark},#{testVersion},#{actualResult},
-                  #{executionResult},#{testBy},
-                  #{supervisedBy},#{executionDate},#{comment}
-                 )
+        insert into test_case_test (item_mark, case_mark, test_version, actual_result, execution_result,
+                                    test_by, supervised_by, execution_date, comment)
+        values (#{itemMark}, #{caseMark}, #{testVersion}, #{actualResult},
+                #{executionResult}, #{testBy},
+                #{supervisedBy}, #{executionDate}, #{comment})
     </insert>
 </mapper>

@@ -9,5 +9,7 @@ import java.util.List;
  * @date 2021/3/28 12:52
  */
 public interface TestItemClassificationService {
+
     List<TestItemClassification> generateMark(String itemName);
+
 }

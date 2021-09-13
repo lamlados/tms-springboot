@@ -3,25 +3,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lam.tms.mapper.SysUserMapper">
 
-<!--    <select id="selectByKeywords" parameterType="java.lang.String" resultType="SysUser">-->
-<!--        SELECT-->
-<!--        id,-->
-<!--        username,-->
-<!--        password,-->
-<!--        `status`,-->
-<!--        create_time AS createTime,-->
-<!--        last_update_time AS lastUpdateTime,-->
-<!--        FROM-->
-<!--        tms_user-->
-<!--        <if test="keywords != null">-->
-<!--            WHERE CONCAT(`username`,nickname) LIKE CONCAT('%',#{keywords},'%')-->
-<!--        </if>-->
-<!--    </select>-->
+    <!--    <select id="selectByKeywords" parameterType="java.lang.String" resultType="SysUser">-->
+    <!--        SELECT-->
+    <!--        id,-->
+    <!--        username,-->
+    <!--        password,-->
+    <!--        `status`,-->
+    <!--        create_time AS createTime,-->
+    <!--        last_update_time AS lastUpdateTime,-->
+    <!--        FROM-->
+    <!--        tms_user-->
+    <!--        <if test="keywords != null">-->
+    <!--            WHERE CONCAT(`username`,nickname) LIKE CONCAT('%',#{keywords},'%')-->
+    <!--        </if>-->
+    <!--    </select>-->
     <select id="selectByKeywords" parameterType="java.util.Map" resultType="SysUser">
-        SELECT username,password FROM tms_user where username = #{username} and password = #{password}
+        SELECT username, password
+        FROM tms_user
+        where username = #{username}
+          and password = #{password}
     </select>
     <select id="findByUsername" parameterType="java.lang.String" resultType="SysUser">
-        SELECT id,username,password FROM tms_user where username = #{username}
+        SELECT id, username, password
+        FROM tms_user
+        where username = #{username}
     </select>
 
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 测试项目Service 实现类
+ *
  * @author lamlados
  * @date 2021/2/20 15:26
  */
@@ -21,8 +22,13 @@ public class TestItemMainServiceImpl implements TestItemMainService {
     private TestItemMainMapper testItemMainMapper;
 
     @Override
-    public List<TestItemMain> getTestItemMainList() { return testItemMainMapper.getTestItemMainList(); }
+    public List<TestItemMain> getTestItemMainList() {
+        return testItemMainMapper.getTestItemMainList();
+    }
 
     @Override
-    public List<String> getNameList() { return testItemMainMapper.getNameList(); }
+    public List<String> getNameList() {
+        return testItemMainMapper.getNameList();
+    }
+
 }

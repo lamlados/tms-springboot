@@ -26,7 +26,6 @@ public class EncryptUtils {
         return Base64.getEncoder().encodeToString(source.getBytes());
     }
 
-
     /**
      * 生成一个模板的key
      *

@@ -10,7 +10,8 @@
     </resultMap>
 
     <select id="generateMark" resultMap="BaseResultMap">
-        SELECT * FROM test_item_classification
+        SELECT *
+        FROM test_item_classification
         where item_name = #{itemName}
     </select>
 

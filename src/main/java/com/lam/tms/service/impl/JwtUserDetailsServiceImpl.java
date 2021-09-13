@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Spring Security 认证 UserDetailsService 实现类
+ *
  * @author lamlados
  * @date 2021/2/20 15:26
  */
@@ -28,6 +29,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private SysUserService sysUserService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = sysUserService.findUser(SysUser.builder().username(username).build());
@@ -39,6 +41,5 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
             return new JwtUser(user.getId(), user.getUsername(), user.getPassword(), null);
         }
     }
-
 
 }

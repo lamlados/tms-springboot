@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 /**
  * @author lamlados
  * @date 2021/2/28 22:57
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/system/bug")
 public class ProbelmDescriptionController {
+
     @Autowired
     private ProblemDescriptionService problemDescriptionService;
 
@@ -37,7 +39,7 @@ public class ProbelmDescriptionController {
 
     @ApiOperation(value = "分页查询", notes = "问题分页查询")
     @PostMapping("/pageInfo")
-    public JsonResult<PageInfo<TestCaseDesign>> getPageInfo(PageVo pageVo){
+    public JsonResult<PageInfo<TestCaseDesign>> getPageInfo(PageVo pageVo) {
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
         List<ProblemDescription> list = problemDescriptionService.getAllList();
         PageInfo<ProblemDescription> pageInfo = new PageInfo<ProblemDescription>(list);
@@ -46,23 +48,22 @@ public class ProbelmDescriptionController {
 
     @ApiOperation(value = "全部查询", notes = "问题全部查询")
     @GetMapping("/all")
-    public JsonResult<PageInfo<ProblemDescription>> getAllList(PageVo pageVo, String problemMark){
+    public JsonResult<PageInfo<ProblemDescription>> getAllList(PageVo pageVo, String problemMark) {
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
-        if(problemMark==null){
+        if (problemMark == null) {
             List<ProblemDescription> list = problemDescriptionService.getAllList();
             PageInfo<ProblemDescription> pageInfo = new PageInfo<ProblemDescription>(list);
             return JsonResult.success(pageInfo);
-        }else{
+        } else {
             List<ProblemDescription> list = problemDescriptionService.getListByMark(problemMark);
             PageInfo<ProblemDescription> pageInfo = new PageInfo<ProblemDescription>(list);
             return JsonResult.success(pageInfo);
         }
     }
 
-
     @ApiOperation(value = "添加问题", notes = "添加问题")
     @PostMapping("/add")
-    public JsonResult<Integer> createCase(@RequestBody String json){
+    public JsonResult<Integer> createCase(@RequestBody String json) {
         ProblemDescription problemDescription = JsonUtils.jsonToPojo(json, ProblemDescription.class);
         int result = problemDescriptionService.createCase(problemDescription);
         return JsonResult.success(result);
@@ -70,7 +71,7 @@ public class ProbelmDescriptionController {
 
     @ApiOperation(value = "根据ID更新", notes = "根据ID更新问题")
     @PostMapping("/update")
-    public JsonResult<Integer> updateById(@RequestBody String json){
+    public JsonResult<Integer> updateById(@RequestBody String json) {
         ProblemDescription problemDescription = JsonUtils.jsonToPojo(json, ProblemDescription.class);
         int result = problemDescriptionService.updateProblem(problemDescription);
         return JsonResult.success(result);
@@ -78,7 +79,7 @@ public class ProbelmDescriptionController {
 
     @ApiOperation(value = "根据ID删除", notes = "根据ID删除问题")
     @PostMapping("/delete")
-    public JsonResult<Integer> deleteById(Integer id){
+    public JsonResult<Integer> deleteById(Integer id) {
         int result = problemDescriptionService.deleteById(id);
         return JsonResult.success(result);
     }
@@ -91,7 +92,8 @@ public class ProbelmDescriptionController {
         String problemMark = redisTemplate.opsForValue().get("originProblemMark");
         int result = problemDescriptionService.checkMark(problemMark);
 
-        String[] marks = {itemMark, caseNumber, problemMark+"-B-"+(result+1)};
+        String[] marks = {itemMark, caseNumber, problemMark + "-B-" + (result + 1)};
         return JsonResult.success(marks);
     }
+
 }

@@ -12,6 +12,9 @@ import java.util.List;
  */
 
 public interface TestItemMainService {
+
     List<TestItemMain> getTestItemMainList();
+
     List<String> getNameList();
+
 }

@@ -19,7 +19,6 @@ import org.springframework.security.core.AuthenticationException;
 
 public interface SysUserService extends BaseService<SysUser, Integer> {
 
-
     /**
      * 用户登录
      *
@@ -30,8 +29,8 @@ public interface SysUserService extends BaseService<SysUser, Integer> {
      */
     String login(String username, String password) throws AuthenticationException;
 
-
     SysUser findUser(SysUser user);
+
     /**
      * 校验登录的用户中，用户名，是否正确
      *
@@ -41,7 +40,6 @@ public interface SysUserService extends BaseService<SysUser, Integer> {
      */
     JwtUser validateUsername(String username);
 
-
     /**
      * 获取用户详细信息
      *
@@ -49,9 +47,9 @@ public interface SysUserService extends BaseService<SysUser, Integer> {
      */
     UserVo findUserInfo();
 
-
     /**
      * 分页 获取用户详细信息
+     *
      * @param parameter
      * @return PageInfo<SysUserVo>
      */

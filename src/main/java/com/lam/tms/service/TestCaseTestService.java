@@ -6,6 +6,7 @@ import com.lam.tms.entity.TestCaseTest;
 import java.util.List;
 
 public interface TestCaseTestService {
+
     int deleteById(Integer id);
 
     int updateCase(TestCaseTest testCase);
@@ -13,4 +14,5 @@ public interface TestCaseTestService {
     List<TestCaseTest> getAllList();
 
     int createCase(TestCaseTest newCase);
+
 }

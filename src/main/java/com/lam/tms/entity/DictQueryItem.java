@@ -12,7 +12,18 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 public class DictQueryItem {
+
+    /**
+     * 字典类型
+     */
     private String dictType;
+    /**
+     * 字典内容
+     */
     private String dictContent;
+    /**
+     * 字典标识
+     */
     private String dictMark;
+
 }

@@ -42,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/system/item")
 public class TestCaseDesignController {
+
     @Autowired
     private TestCaseDesignService testCaseDesignService;
 
@@ -51,7 +52,7 @@ public class TestCaseDesignController {
 
     @ApiOperation(value = "分页查询", notes = "测试用例分页查询")
     @PostMapping("/pageInfo")
-    public JsonResult<PageInfo<TestCaseDesign>> getPageInfo(PageVo pageVo){
+    public JsonResult<PageInfo<TestCaseDesign>> getPageInfo(PageVo pageVo) {
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
         List<TestCaseDesign> list = testCaseDesignService.getAllList();
         PageInfo<TestCaseDesign> pageInfo = new PageInfo<TestCaseDesign>(list);
@@ -60,23 +61,22 @@ public class TestCaseDesignController {
 
     @ApiOperation(value = "全部查询", notes = "测试用例全部查询")
     @GetMapping("/all")
-    public JsonResult<PageInfo<TestCaseDesign>> getAllList(PageVo pageVo, String caseMark){
+    public JsonResult<PageInfo<TestCaseDesign>> getAllList(PageVo pageVo, String caseMark) {
         PageHelper.startPage(pageVo.getPageNum(), pageVo.getPageSize());
-        if(caseMark==null){
+        if (caseMark == null) {
             List<TestCaseDesign> list = testCaseDesignService.getAllList();
             PageInfo<TestCaseDesign> pageInfo = new PageInfo<TestCaseDesign>(list);
             return JsonResult.success(pageInfo);
-        }else{
+        } else {
             List<TestCaseDesign> list = testCaseDesignService.getListByMark(caseMark);
             PageInfo<TestCaseDesign> pageInfo = new PageInfo<TestCaseDesign>(list);
             return JsonResult.success(pageInfo);
         }
     }
 
-
     @ApiOperation(value = "根据ID更新", notes = "根据ID更新测试用例")
     @PostMapping("/update")
-    public JsonResult<Integer> updateById(@RequestBody String json){
+    public JsonResult<Integer> updateById(@RequestBody String json) {
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
         String testDescription = redisTemplate.opsForValue().get("testDescription");
         String s = testDescription.replaceAll("E:/static", "http://localhost:8090/image");
@@ -87,7 +87,7 @@ public class TestCaseDesignController {
 
     @ApiOperation(value = "新增用例", notes = "新增测试用例")
     @PostMapping("/add")
-    public JsonResult<Integer> createCase(@RequestBody String json){
+    public JsonResult<Integer> createCase(@RequestBody String json) {
         TestCaseDesign testCaseDesign = JsonUtils.jsonToPojo(json, TestCaseDesign.class);
         String testDescription = redisTemplate.opsForValue().get("testDescription");
         String s = testDescription.replaceAll("E:/static", "http://localhost:8090/image");
@@ -98,7 +98,7 @@ public class TestCaseDesignController {
 
     @ApiOperation(value = "根据ID删除", notes = "根据ID删除测试用例")
     @PostMapping("/delete")
-    public JsonResult<Integer> deleteById(Integer id){
+    public JsonResult<Integer> deleteById(Integer id) {
         int result = testCaseDesignService.deleteById(id);
         return JsonResult.success(result);
     }
@@ -115,14 +115,13 @@ public class TestCaseDesignController {
     public JsonResult<Integer> uploadPic(MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         int length = originalFilename.length();
-        String finalFilename = originalFilename.substring(0,length-4);;
-        String picUrl = "E:/static/"+finalFilename+".png";
+        String finalFilename = originalFilename.substring(0, length - 4);
+        String picUrl = "E:/static/" + finalFilename + ".png";
         File f = new File(picUrl);
         file.transferTo(f);
         redisTemplate.opsForValue().set("testDescription", picUrl, 10, TimeUnit.MINUTES);
         return JsonResult.success("上传成功");
     }
-
 
 }
 

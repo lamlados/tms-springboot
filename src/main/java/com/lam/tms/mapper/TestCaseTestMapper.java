@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TestCaseTestMapper {
+
     int deleteById(Integer id);
 
     int updateCase(TestCaseTest testCase);
@@ -16,6 +17,5 @@ public interface TestCaseTestMapper {
     List<TestCaseTest> getAllList();
 
     int createCase(TestCaseTest newCase);
-
 
 }

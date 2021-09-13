@@ -13,10 +13,17 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ProblemDescriptionMapper {
+
     int createCase(ProblemDescription newCase);
+
     int deleteById(Integer id);
+
     int updateProblem(ProblemDescription problemDescription);
+
     List<ProblemDescription> getAllList();
+
     List<ProblemDescription> getListByMark(String problemMark);
+
     int checkMark(String curMark);
+
 }

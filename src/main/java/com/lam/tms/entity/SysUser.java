@@ -30,23 +30,34 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class SysUser extends BaseEntity implements java.io.Serializable {
 
-    /**序号*/
+    /**
+     * 序号
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    /**用户名*/
+    /**
+     * 用户名
+     */
     private String username;
-    /**密码*/
+    /**
+     * 密码
+     */
     private String password;
-    /**真实名*/
+    /**
+     * 真实名
+     */
     private String realName;
-    /**最后登陆时间*/
+    /**
+     * 最后登陆时间
+     */
     @JsonIgnore
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lastLogin;
-    /**备注*/
+    /**
+     * 备注
+     */
     private String comment;
-    /** 状态 [ 0.禁用 1.正常 2.被删除 ] */
 
 }

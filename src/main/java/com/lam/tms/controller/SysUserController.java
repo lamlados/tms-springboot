@@ -18,7 +18,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 
-
 /**
  * 用户管理 控制器
  *
@@ -53,15 +52,11 @@ public class SysUserController extends BaseController<SysUser, Integer, SysUserS
         return JsonResult.success(userInfo);
     }
 
-
-
     @ApiOperation(value = "注销", notes = "注销")
     @GetMapping("/logout")
     public JsonResult<UserVo> findUserInfo(String wtf) {
         UserVo userInfo = baseService.findUserInfo();
         return JsonResult.success(userInfo);
     }
-
-
 
 }

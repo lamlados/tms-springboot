@@ -13,7 +13,11 @@ import java.util.List;
 @Mapper
 @Repository
 public interface DictQueryMapper {
+
     List<DictQueryItem> getNoMarkList(String queryType);
+
     List<DictQueryItem> getMarkList(String queryType);
+
     List<DictQueryItem> getAbilityList(String queryType);
+
 }

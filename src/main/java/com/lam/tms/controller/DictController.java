@@ -24,22 +24,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/dict")
 public class DictController {
+
     @Autowired
     private DictQueryMapper dictQueryMapper;
 
     @ApiOperation(value = "测试项目", notes = "测试项目字典")
     @PostMapping("/testItem")
-    public JsonResult<DictVo> getTestItem(){
+    public JsonResult<DictVo> getTestItem() {
         List<DictQueryItem> list = dictQueryMapper.getMarkList("测试项目");
         return JsonResult.success(list);
     }
 
     @ApiOperation(value = "测试能力点", notes = "测试能力点字典")
     @GetMapping("/abilities")
-    public JsonResult<DictVo> getAbilities(String currentItem){
+    public JsonResult<DictVo> getAbilities(String currentItem) {
         List<DictQueryItem> list = dictQueryMapper.getAbilityList(currentItem);
-        System.out.println(currentItem);
-        System.out.println(list);
         return JsonResult.success(list);
     }
 

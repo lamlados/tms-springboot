@@ -13,5 +13,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TestItemClassificationMapper {
+
     List<TestItemClassification> generateMark(String itemName);
+
 }

@@ -49,7 +49,6 @@ public class AuthController {
     @Lazy
     private RedisTemplate<String, String> redisTemplate;
 
-
     @ApiOperation(value = "用户登录认证", notes = "用户名，密码登录格式 {\"username\":\"admin\",\"password\":\"admin\"}")
     @PostMapping("/login")
     public JsonResult<TokenValue> login(@RequestBody @Validated LoginUser user, BindingResult br) {
@@ -83,7 +82,6 @@ public class AuthController {
         }
     }
 
-
     @ApiOperation(value = "刷新Token值", notes = "只需要在请求头中附带token即可")
     @GetMapping("/refresh")
     public JsonResult<TokenValue> refresh(@RequestHeader(value = "${jwt.tokenHeader}") String completeToken) {
@@ -110,7 +108,6 @@ public class AuthController {
         return JsonResult.fail("token格式错误!");
     }
 
-
     @ApiOperation(value = "获取图形验证码", notes = "获取图形验证码, codeKey 前端传入一个随机生成的字符串")
     @GetMapping("/verify/code/{codeKey}")
     public void imageVerifyCode(@PathVariable String codeKey, HttpServletResponse response) throws IOException {
@@ -126,7 +123,6 @@ public class AuthController {
         String codeText = image.getCodeText();
         // 将验证码的 codeKey 和 codeText , 保存在 redis 中，有效时间为 10 分钟
         redisTemplate.opsForValue().set(codeKey, codeText, 10, TimeUnit.MINUTES);
-
         ImageIO.write(image.getImage(), "JPEG", response.getOutputStream());
     }
 

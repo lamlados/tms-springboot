@@ -89,7 +89,6 @@ public class JsonResult<T> implements Serializable {
         return result(status, message, null);
     }
 
-
     /**
      * 操作成功
      *
@@ -156,7 +155,6 @@ public class JsonResult<T> implements Serializable {
         return result(HttpStatus.OK.status, message, data);
     }
 
-
     /**
      * 操作失败
      *
@@ -169,7 +167,6 @@ public class JsonResult<T> implements Serializable {
         return result(HttpStatus.FAIL.status, message, null);
     }
 
-
     /**
      * 未授权
      *
@@ -180,7 +177,6 @@ public class JsonResult<T> implements Serializable {
     public static <T> JsonResult error401() {
         return result(HttpStatus.UNAUTHORIZED.status, HttpStatus.UNAUTHORIZED.value, null);
     }
-
 
     /**
      * 不支持的请求类型
@@ -193,7 +189,6 @@ public class JsonResult<T> implements Serializable {
         return result(HttpStatus.UNSUPPORTED_MEDIA_TYPE.status, HttpStatus.UNSUPPORTED_MEDIA_TYPE.value, null);
     }
 
-
     /**
      * 404 未找到
      *
@@ -205,7 +200,6 @@ public class JsonResult<T> implements Serializable {
         return result(HttpStatus.NOT_FOUND.status, HttpStatus.NOT_FOUND.value, null);
     }
 
-
     /**
      * 服务器内部错误
      *
@@ -216,7 +210,6 @@ public class JsonResult<T> implements Serializable {
     public static <T> JsonResult error500() {
         return result(HttpStatus.INTERNAL_SERVER_ERROR.status, HttpStatus.INTERNAL_SERVER_ERROR.value, null);
     }
-
 
     /**
      * restful api 返回状态码。不够的时候自己扩展
@@ -268,7 +261,6 @@ public class JsonResult<T> implements Serializable {
          */
         UNSUPPORTED_MEDIA_TYPE(415, "不支持此请求类型！"),
 
-
         /**
          * 服务器内部错误 返回代码
          *
@@ -285,7 +277,6 @@ public class JsonResult<T> implements Serializable {
             this.status = status;
             this.value = value;
         }
-
     }
 
 }

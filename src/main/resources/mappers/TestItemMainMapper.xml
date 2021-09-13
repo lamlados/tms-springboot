@@ -3,6 +3,7 @@
 
 <mapper namespace="com.lam.tms.mapper.TestItemMainMapper">
     <select id="getNameList" parameterType="java.util.List" resultType="java.lang.String">
-        SELECT item_name FROM test_item_main
+        SELECT item_name
+        FROM test_item_main
     </select>
 </mapper>
